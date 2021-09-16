@@ -12,224 +12,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="/images/logo-short.svg" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script>
-            function minus() {
-                let vale = $('.catalog-detail__qt-field').val();
-                if (vale > 1)
-                    vale--;
-                $('.catalog-detail__qt-field').val(vale);
-            }
-
-            function plus() {
-                let vale = $('.catalog-detail__qt-field').val();
-                vale++;
-                $('.catalog-detail__qt-field').val(vale);
-            }
-
-            function one() {
-                $('.onetext').css({
-                    'display':'block'
-                });
-                $('.twotext').css({
-                    'display':'none'
-                });
-                $('.threetext').css({
-                    'display':'none'
-                });
-            }
-
-            function two() {
-                $('.onetext').css({
-                    'display':'none'
-                });
-                $('.twotext').css({
-                    'display':'block'
-                });
-                $('.threetext').css({
-                    'display':'none'
-                });
-            }
-
-            function three() {
-                $('.onetext').css({
-                    'display':'none'
-                });
-                $('.twotext').css({
-                    'display':'none'
-                });
-                $('.threetext').css({
-                    'display':'block'
-                });
-            }
-
-    </script>
-    <style>
-        .camp
-        {
-            padding: 2px;
-            color: black;
-            font-size: 20px;
-            transition:all .3s ease-out 0s;
-        }
-        .camp:hover
-        {
-            color:#4a50e1;
-        }
-        body{
-            font-family: cursive;
-        }
-        .navbar li a {
-            font-size: 1em;
-            color: black;
-        }
-        div
-        {
-            margin-top:5px;
-        }
-        button,.btn-outline-primary
-        {
-            height: 40px;
-            width: 75px;
-        }
-        button, .btn-primary
-        {
-            width: 100%;
-            margin-bottom:10px;
-            text-align: center;
-        }
-        .collapse
-        {
-            justify-content: center;
-        }
-        .navbar
-        {
-            justify-content: center;
-        }
-        .catalog-detail {
-            display: flex;
-            width: 7rem;
-            padding: 0 .75rem;
-            height: 2.75rem;
-            line-height: 2.9;
-            border: 1px solid #d2d2d2;
-            overflow: hidden;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border : black solid 1px;
-            border-radius: 5px;
-        }
-        .buttons
-        {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .buttons button
-        {
-            width: 175px;
-            height:50px;
-        }
-        .catalog-detail__qt-btn {
-            height: 2.75rem;
-            border: none;
-            padding: 0 .5rem;
-            cursor: pointer;
-            background: none;
-        }
-        .catalog-detail__qt-field {
-            float: left;
-            width: 2.4rem;
-            height: 100%;
-            border: 0;
-            text-align: center;
-        }
-        a.tip
-        {
-            position: relative;
-            color: black;
-            cursor: pointer;
-            line-height: 1;
-            text-decoration: none;
-        }
-        a.tip:after {
-            display: block;
-            position: absolute;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: blue;
-            content: "";
-            transition: width 0.3s ease-out;
-        }
-        a.tip:hover:after,
-        a.tip:focus:after {
-            width: 100%;
-        }
-        .cost
-        {
-            color:black;
-            font-size: 4em
-        }
-        @media (min-width: 540px) and (max-width: 760px)
-        {
-            .cost{
-                font-size:45px;
-            }
-            .ezji
-            {
-                font-size: 20px;
-            }
-            .ezjitwo
-            {
-                font-size: 20px;
-            }
-        }
-        @media (min-width: 540px) and (max-width: 750px)
-        {
-
-        }
-        @media (min-width: 200px) and (max-width: 540px)
-        {
-            .cost{
-                font-size:25px;
-            }
-            .ezji
-            {
-                font-size: 10px;
-            }
-            .ezjitwo
-            {
-                font-size: 10px;
-            }
-        }
-        .ssl p a
-        {
-            color:rgba(0,0,0,.4);
-            font-size:14px;
-        }
-        .ssl p
-        {
-            font-size: 20px;
-        }
-        .ssl{
-            padding-left: 30px;
-            padding-right: 30px;
-        }
-
-    </style>
+    <link href="index.css" rel="stylesheet">
+    <script src="index.js"></script>
 </head>
 <body>
 
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="row">
-                <div class="col" style="justify-content: center;text-align: center;">
+                <div class="col log">
                     <a href="#">
                         <img src="images/logo-short.svg" alt="Кекс">
                     </a>
-                    <svg class="header__logo-text" version="1.1" id="svg2" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-1 0 398.2 83.9" style="enable-background:new 0 0 398.2 83.9;" width="381px" height="54px" fill="#000000" xml:space="preserve">
+                    <svg class="header__logo-text" version="1.1" id="svg2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-1 0 398.2 83.9" style="enable-background:new 0 0 398.2 83.9;" width="381px" height="54px" fill="#000000" xml:space="preserve">
         <g id="g12" transform="translate(211.1484,32.7559)">
             <path class="header__logo-text-letter header__logo-text-letter_6 st0" id="path14" d="M-62.6,10.2l6.2,6.2l6.2-6.2L-56.5,4L-62.6,10.2z"></path>
         </g>
@@ -307,57 +102,57 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav" style="text-align: left;font-size:12px;justify-content: left;padding-right: 30px;">
+                        <ul class="navbar-nav gdsfsd">
                             <li class="nav-item active">
-                                <b><a class="nav-link" href="#" style="color:black">СКИДКИ</a></b>
+                                <b><a class="nav-link" href="#">СКИДКИ</a></b>
                             </li>
                             <li class="nav-item">
-                                <b><a class="nav-link" href="#" style="color:black">НОВИНКИ</a></b>
+                                <b><a class="nav-link" href="#">НОВИНКИ</a></b>
                             </li>
                             <li class="nav-item">
-                                <b><a class="nav-link" href="#" style="color:black">КАТАЛОГ</a></b>
+                                <b><a class="nav-link" href="#">КАТАЛОГ</a></b>
                             </li>
                             <li class="nav-item">
-                                <b> <a class="nav-link" href="#" style="color:black">ОДЕЖДА</a></b>
+                                <b> <a class="nav-link" href="#">ОДЕЖДА</a></b>
                             </li>
                             <li class="nav-item">
-                                <b><a class="nav-link" href="#" style="color:black">ОБУВЬ</a></b>
+                                <b><a class="nav-link" href="#">ОБУВЬ</a></b>
                             </li>
                             <li class="nav-item">
-                                <b><a class="nav-link" href="#" style="color:black">ТУРИЗМ</a></b>
+                                <b><a class="nav-link" href="#">ТУРИЗМ</a></b>
                             </li>
                             <li class="nav-item">
-                                <b><a class="nav-link" href="#" style="color:black">БЕГ</a></b>
+                                <b><a class="nav-link" href="#">БЕГ</a></b>
                             </li>
                             <li class="nav-item">
-                                <b><a class="nav-link" href="#" style="color:black">АЛЬПИНИЗМ</a></b>
+                                <b><a class="nav-link" href="#">АЛЬПИНИЗМ</a></b>
                             </li>
                             <li class="nav-item">
-                                <b><a class="nav-link" href="#" style="color:black">ГОРНЫЕ ЛЫЖИ</a></b>
+                                <b><a class="nav-link" href="#">ГОРНЫЕ ЛЫЖИ</a></b>
                             </li>
                             <li class="nav-item">
-                                <b><a class="nav-link" href="#" style="color:black">СНОУБОРД</a></b>
+                                <b><a class="nav-link" href="#">СНОУБОРД</a></b>
                             </li>
                         </ul>
-                        <a href="#" style="font-size: 19px;" class="camp">ВХОД</a>
+                        <a class="camp fghfd" href="#">ВХОД</a>
                     </div>
                 </div>
             </div>
         </nav>
-        <div class="container" style="margin-top:130px; text-align: center">
-            <span style="font-size:10px">
-                <a href="#" style="color:#A9A9A9">Главная</a>>
-                <a href="#" style="color:#A9A9A9">Каталог</a>>
-                <a href="#" style="color:#A9A9A9">Альпинистское снаряжение</a>>
-                <a href="#" style="color:#A9A9A9">Страховочное снаряжение</a>>
-                <a href="#" style="color:#A9A9A9">Страховочные системы</a>>
-                <a href="#" style="color:#A9A9A9">Беседка Camp Impulse Orange</a>
+        <div class="container main">
+            <span>
+                <a href="#">Главная</a>>
+                <a href="#">Каталог</a>>
+                <a href="#">Альпинистское снаряжение</a>>
+                <a href="#">Страховочное снаряжение</a>>
+                <a href="#">Страховочные системы</a>>
+                <a href="#">Беседка Camp Impulse Orange</a>
             </span>
         </div>
 
         <a href="#top" name="top"></a>
-        <div class="row" style="margin-top:30px">
-            <div class="col-7" style="float: left">
+        <div class="row jim">
+            <div class="col-7">
 
                 <div id="carousel" class="carousel slide" data-ride="carousel">
                     <!-- Индикаторы -->
@@ -367,7 +162,7 @@
                         <li data-target="#carousel" data-slide-to="2"></li>
                         <li data-target="#carousel" data-slide-to="3"></li>
                     </ol>
-                    <div class="carousel-inner" style="justify-content: center; text-align: center">
+                    <div class="carousel-inner carous">
                         <div class="carousel-item active">
                             <img height="450px" width="300px" class="img-fluid" src="https://sport-marafon.ru/upload/files/iblock/elements/9838da69-acd1-11e2-9e97-e83935202582/5188068a-d9ad-11eb-80cc-901b0e95a2a8/5188068ad9ad11eb80cc901b0e95a2a8_0f6598bce63d11eb80cf901b0e95a2a8.jpg" alt="...">
                         </div>
@@ -384,27 +179,27 @@
                     <!-- Элементы управления -->
                     <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only" style="color:white;"></span>
+                        <span class="sr-only"></span>
                     </a>
                     <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only" style="color:white;"></span>
+                        <span class="sr-only"></span>
                     </a>
                 </div>
 
-                <div class="row" style="margin-left: 20px;margin-top: 20px;">
-                    <div class="col-md-3" style="float: left">
+                <div class="row dvij">
+                    <div class="col-md-3">
                         <a href="#top" onclick="one()" class="tip one">О товаре</a>
                     </div>
-                    <div class="col-md-4" style="float: left" >
+                    <div class="col-md-4">
                         <a href="#top" onclick="two()" class="tip two">Характеристики</a>
                     </div>
-                    <div class="col-md-3" style="float: left">
+                    <div class="col-md-3">
                         <a href="#top" onclick="three()" class="tip three">О бренде</a>
                     </div>
                 </div>
 
-                <div class="container onetext" style="margin-top: 20px;">
+                <div class="container onetext jim">
                     <p>
                         Модель Impulse — лучшая страховочная система CAMP для скалолазания.
                     </p>
@@ -423,75 +218,77 @@
                         снаряжения. Сзади расположена пятая петля, куда удобно подстегнуть запасное
                         снаряжение, вторую веревку или мешок с магнезией.
                     </p>
-                    <ul>
-                        <li>инновационная технология пояса для большего комфорта;</li>
-                        <li>перфорированная EVA подкладка обеспечивает превосходную вентиляцию;</li>
-                        <li>стальная пряжка обратного хода на поясе;</li>
-                        <li>нерегулируемые ножные обхваты;</li>
-                        <li>4 жёсткие разгрузочные петли;</li>
-                        <li>силовая петля сзади для вспомогательного снаряжения;</li>
-                        <li>вес 355 г для размера М;</li>
-                        <li>обхват пояса, см: XS 62-72, S 69-79, M 76-86, L 83-93;</li>
-                        <li> обхват бедра, см: XS 48-52, S 52-56, M 56-60, L 60-64.</li>
-                    </ul>
+                    <div class="spic">
+                        <ul>
+                            <li><p>инновационная технология пояса для большего комфорта;</p></li>
+                            <li><p>перфорированная EVA подкладка обеспечивает превосходную вентиляцию;</p></li>
+                            <li><p>стальная пряжка обратного хода на поясе;</p></li>
+                            <li><p>нерегулируемые ножные обхваты;</p></li>
+                            <li><p>4 жёсткие разгрузочные петли;</p></li>
+                            <li><p>силовая петля сзади для вспомогательного снаряжения;</p></li>
+                            <li><p>вес 355 г для размера М;</p></li>
+                            <li><p>обхват пояса, см: XS 62-72, S 69-79, M 76-86, L 83-93;</p></li>
+                            <li><p>обхват бедра, см: XS 48-52, S 52-56, M 56-60, L 60-64.</p></li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="container twotext" style="margin-top: 20px;display: none;">
+                <div class="container twotext jimv">
 
                     <ul>
                         <li>
                             <div>
                                 <span>Вес(кг)</span>
                             </div>
-                            <span style="margin-left: 20px">0.355</span>
+                            <span class="char">0.355</span>
                         </li>
 
                         <li>
                             <div>
                                 <span>Тип</span>
                             </div>
-                            <span style="margin-left: 20px">Страховочная система</span>
+                            <span class="char">Страховочная система</span>
                         </li>
 
                         <li>
                             <div>
                                 <span>Количество пряжек</span>
                             </div>
-                            <span style="margin-left: 20px">1</span>
+                            <span class="char">1</span>
                         </li>
 
                         <li>
                             <div>
                                 <span>Слоты под кэритулы</span>
                             </div>
-                            <span style="margin-left: 20px">Нет</span>
+                            <span class="char">Нет</span>
                         </li>
 
                         <li>
                             <div>
                                 <span>Тип страховочной системы</span>
                             </div>
-                            <span style="margin-left: 20px">Нижняя</span>
+                            <span class="char">Нижняя</span>
                         </li>
 
                         <li>
                             <div>
                                 <span>Сезон</span>
                             </div>
-                            <span style="margin-left: 20px">21</span>
+                            <span class="char">21</span>
                         </li>
 
                         <li>
                             <div>
                                 <span>Пол</span>
                             </div>
-                            <span style="margin-left: 20px">Унисекс</span>
+                            <span class="char">Унисекс</span>
                         </li>
 
                     </ul>
                 </div>
 
-                <div class="container threetext" style="margin-top: 20px;display: none;">
+                <div class="container threetext jimv">
                     <p><a href="#top" class="camp">Camp</a></p>
                     <p>
                         Компания C.A.M.P. основана в 1889 году в маленьком городке
@@ -503,32 +300,34 @@
 
             </div>
             <div class="col-4 float-md-right vi sidebar">
-                <h2 style="color:black;font-size: 28px">
+                <h2 class="name">
                     Беседка Camp Impulse Orange
                 </h2>
                 <h2 class="cost">
                     9 990₽
                 </h2>
 
-                <p>
-                    <a href="#" style="color:#A9A9A9;font-size:14px;">Сообщить о снижении цены</a>
-                </p>
-                <p>
-                    <a href="#" style="color:#A9A9A9;font-size:14px;">Нашли дешевле?</a>
-                </p>
-                <p>
-                        <span style="color:#A9A9A9;font-size:14px;">
-                            Код товара <span style="color:black;">2936</span>
-                        </span>
-                </p>
-                <p>
-                    Цвет <img src="https://sport-marafon.ru/upload/resize_cache/files/iblock/elements/9838da69-acd1-11e2-9e97-e83935202582/5188068a-d9ad-11eb-80cc-901b0e95a2a8/40_50_1/5188068ad9ad11eb80cc901b0e95a2a8_0f6598bce63d11eb80cf901b0e95a2a8.jpg" alt="">
-                </p>
-                <p>
-                        <span style="color:#A9A9A9;font-size:14px;">
-                            Размер
-                        </span>
-                </p>
+                <span class="poi">
+                    <p>
+                        <a href="#">Сообщить о снижении цены</a>
+                    </p>
+                    <p>
+                        <a href="#">Нашли дешевле?</a>
+                    </p>
+                    <p>
+                            <span >
+                                Код товара <span class="black">2936</span>
+                            </span>
+                    </p>
+                    <p>
+                        Цвет <img src="https://sport-marafon.ru/upload/resize_cache/files/iblock/elements/9838da69-acd1-11e2-9e97-e83935202582/5188068a-d9ad-11eb-80cc-901b0e95a2a8/40_50_1/5188068ad9ad11eb80cc901b0e95a2a8_0f6598bce63d11eb80cf901b0e95a2a8.jpg" alt="">
+                    </p>
+                    <p>
+                            <span>
+                                Размер
+                            </span>
+                    </p>
+                </span>
 
                 <div class="container">
                     <div class="row">
@@ -554,51 +353,51 @@
                     </button>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-lg ezji" style="margin-top: 10px;">В корзину</button>
+                <button type="button" class="btn btn-primary btn-lg ezji"   >В корзину</button>
                 <button type="button" class="btn btn-outline-secondary ezjitwo">К сравнению</button>
 
             </div>
         </div>
 
-        <div class="row" style="margin-top: 20px;">
+        <div class="row jim">
                 <div class="col-md-4">
-                    <div style="text-align: center;">
+                    <div>
                         <img width="90px" height="90px" src="https://sport-marafon.ru/local/templates/main/img/advantage-1.svg" alt="">
                     </div>
-                    <p style="text-align: center;margin-top: 10px;">ПРОФЕССИОНАЛЬНАЯ КОНСУЛЬТАЦИЯ</p>
-                    <p style="color: rgba(0,0,0,.4);margin-top: 20px;">Вся команда нашего магазина увлекается активными видами спорта:
+                    <p class="cen">ПРОФЕССИОНАЛЬНАЯ КОНСУЛЬТАЦИЯ</p>
+                    <p class="cemtf">Вся команда нашего магазина увлекается активными видами спорта:
                     туризмом, альпинизмом, горными лыжами и другими видами outdoor-активности.</p>
                 </div>
                 <div class="col-md-4">
-                    <div style="text-align: center;">
+                    <div>
                         <img width="90px" height="90px" src="https://sport-marafon.ru/local/templates/main/img/advantage-2.svg" alt="">
                     </div>
-                    <p style="text-align: center;margin-top: 10px;">ДОСТАВКА И ОПЛАТА</p>
-                    <p style="color: rgba(0,0,0,.4);margin-top: 20px;">Оплата наличными курьеру или банковской картой без комиссии.</p>
+                    <p class="cen">ДОСТАВКА И ОПЛАТА</p>
+                    <p class="cemtf">Оплата наличными курьеру или банковской картой без комиссии.</p>
                 </div>
                 <div class="col-md-4">
-                    <div style="text-align: center;">
+                    <div>
                         <img width="90px" height="90px" src="https://sport-marafon.ru/local/templates/main/img/advantage-3.svg" alt="">
                     </div>
-                    <p style="text-align: center;margin-top: 10px;">ПОДПИСКА НА НОВОСТИ</p>
-                    <p style="color: rgba(0,0,0,.4);margin-top: 20px;">Коротко о самом важном: новых коллекциях и брендах, о снаряжении и как его выбрать,
+                    <p class="cen">ПОДПИСКА НА НОВОСТИ</p>
+                    <p class="cemtf">Коротко о самом важном: новых коллекциях и брендах, о снаряжении и как его выбрать,
                     ближайших акциях и распродажах.</p>
                     <form action="./mail.php" method="post">
                         <div class="form-group">
                             <input type="email" name="email" class="form-control" id="email1" placeholder="Ваш e-mail">
                         </div>
-                        <button style="margin-top: 10px; color: darksalmon; border:black solid 0.5px; border-radius: 10px;" type="submit" class="btn">Подписаться</button>
+                        <button class="buta" type="submit" class="btn">Подписаться</button>
                     </form>
                 </div>
             </div>
 
-        <p style="color: rgba(0,0,0,.4);margin-top: 20px;">
+        <p class="cemtf">
                 Заметили ошибку? Выделите текст ошибки, нажмите Ctrl+Enter, отправьте форму. Мы постараемся исправить ее.
             </p>
 
     </div>
-    <div class="row ssl jumbotron" style="margin-top: 20px; background-color: #f8f9fa;padding-top: 10px;">
-            <div class="col-md-2" style="text-align: left;">
+    <div class="row ssl jumbotron bv">
+            <div class="col-md-2">
                 <p>Каталог</p>
                 <p><a href="" class="camp">Акции</a></p>
                 <p><a href="" class="camp">Новинки</a></p>
@@ -640,32 +439,31 @@
                 <p><a href="" class="camp">Осторожно, мошенники</a></p>
                 <p><a href="" class="camp">Оферта</a></p>
             </div>
-            <div class="col-md-2">
-                <p><a href="" class="camp" style="font-size: 20px;color: black;">Контакты</a></p>
-                <p style="font-size: 15px;">Москва, ул. Сайкина 4<br>
-                    <span style="color:rgba(0,0,0,.4);font-size: 12px;">ежедневно с 10:00 до 24:00</span></p>
-                <p><a href="" class="camp">8(800)331-14-41</a><br>
-                    <span style="color:rgba(0,0,0,.4);font-size: 10px;">бесплатный звонок по России</span></p>
-                <p style="font-size: 12px; line-height: 1px;">Мы в социальных сетях</p>
-                <div>
-                    <a href="" style="margin-left: 8px;"><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-fb.svg" alt=""></a>
-                    <a href="" style="margin-left: 8px;"><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-vk.svg" alt=""></a>
-                    <a href="" style="margin-left: 8px;"><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-inst-grad.svg" alt=""></a>
-                    <a href="" style="margin-left: 8px;"><img src="https://sport-marafon.ru/local/templates/main/img/tiktok.svg" alt=""></a>
+            <div class="col-md-2 qwer">
+                <p><a href="" class="camp fir">Контакты</a></p>
+                <p class="hpf">Москва, ул. Сайкина 4<br>
+                    <span>ежедневно с 10:00 до 24:00</span></p>
+                <p class="hpf"><a href="" class="camp">8(800)331-14-41</a><br>
+                    <span>бесплатный звонок по России</span></p>
+                <p class="hgjt">Мы в социальных сетях</p>
+                <div class="bobe">
+                    <a href=""><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-fb.svg" alt=""></a>
+                    <a href=""><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-vk.svg" alt=""></a>
+                    <a href=""><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-inst-grad.svg" alt=""></a>
+                    <a href=""><img src="https://sport-marafon.ru/local/templates/main/img/tiktok.svg" alt=""></a>
                 </div>
-                <p style="font-size: 12px;line-height: 1px;margin-top: 8px;">Наши каналы</p>
-                <div>
-                    <a href="" style="margin-left: 8px;"><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-yt.svg" alt=""></a>
-                    <a href="" style="margin-left: 8px;"><img src="https://sport-marafon.ru/local/templates/main/img/soundcloud.svg" alt=""></a>
-                    <a href="" style="margin-left: 8px;"><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-tg.svg" alt=""></a>
+                <p class="hgjt">Наши каналы</p>
+                <div class="bobe">
+                    <a href=""><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-yt.svg" alt=""></a>
+                    <a href=""><img src="https://sport-marafon.ru/local/templates/main/img/soundcloud.svg" alt=""></a>
+                    <a href=""><img src="https://sport-marafon.ru/local/templates/main/img/f-soc-tg.svg" alt=""></a>
                 </div>
                 <div>
                     
                 </div>
             </div>
-        </div></div>
-
-
+        </div>
+    </div>
 
 </body>
 </html>
