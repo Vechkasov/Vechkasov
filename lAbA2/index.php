@@ -1,3 +1,6 @@
+<?php
+    require_once 'db.php';
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -140,7 +143,7 @@
         </div>
     </nav>
 
-    <form action="twoIndex.php" method="get">
+    <form action="index.php" method="post" id="filter_form">
         <label>Фильтрация результата поиска</label>
         <div class="mb-3">
             <label>По цене:</label>
@@ -150,12 +153,16 @@
         <div class="mb-3">
             <label>Фильтрация по категории товара:</label>
             <select name="category" class="form-control">
-                <option value="" selected="">Выберите категорию</option>
-                <option value="1">Горные лыжи</option>
-                <option value="2">Путешествия</option>
-                <option value="3">Альпинизм</option>
-                <option value="4">Бег</option>
-                <option value="5">Туризм</option>
+                <?php
+                    $one = $pdo->query('SELECT * FROM `product_category`');
+                    $i = 1;
+                    while ($row = $one->fetch(PDO::FETCH_ASSOC))
+                    {
+                        echo '<option value="' . $i .'" selected="">' . $row['name_category'] . '</option>';
+                        $i++;
+                    }
+                ?>
+                <option value="0" selected="">Выберите категорию</option>
             </select>
         </div>
         <div class="mb-3">
@@ -167,19 +174,11 @@
             <input class="form-control" type="text" name="name" placeholder="Введите наименование товара" value="" >
         </div>
         <div class="container">
-            <input type="submit" style="width: 220px" value="Применить фильтр" class="btn btn-primary">
-            <input type="submit" name="clearFilter" value="Очистить фильтр" class="btn btn-danger">
+            <input type="submit" onclick="save()" style="width: 220px" value="Применить фильтр" class="btn btn-primary">
+            <input type="submit" onclick="remove()" name="clearFilter" value="Очистить фильтр" class="btn btn-danger">
         </div>
 
     </form>
-    <?php
-        $connection = mysqli_connect("localhost","root","","sport_product");
-        if ($connection == false) {
-            echo "Ошибка подключения к БД<br>";
-            echo mysqli_connect_error();
-            exit();
-        }
-    ?>
 
 <div class="container text-center mt-3">
     <table class="table">
@@ -194,119 +193,7 @@
         </thead>
         <tbody>
         <?php
-        $result = mysqli_query($connection,"SELECT * FROM `product`");
-        if (isset($_GET['clearFilter']) and $_GET) {
-            $_GET['costFrom'] = 0;
-            unset($_GET);
-
-            while ($cat = mysqli_fetch_assoc($result)) {
-
-                $img_path = "catalog_images/" . $cat['img_path'];
-                $name = $cat['name'];
-                $category = $cat['id_product_category'];
-                $description = $cat['description'];
-                $cost = $cat['cost'];
-                $id_category = mysqli_query($connection, "SELECT `name_category` FROM `product_category` WHERE `id_product_category` = $category");
-                $name_category = mysqli_fetch_assoc($id_category);
-
-                echo "<tr>";
-                // изображение
-                echo "<th scope='row'><img src='$img_path' width='200px'></th>";
-                // название
-                echo "<td>$name</td>";
-                // категория
-                echo "<td>" . $name_category['name_category'] . "</td>";
-                // описание
-                echo "<td>$description</td>";
-                // стоимость
-                echo "<td>$cost</td>";
-                echo "</tr>";
-            }
-        }
-        else if ($_GET != 0)
-        {
-            if ($_GET['costFrom'] == '' and $_GET['costTo'] == '' and $_GET['category'] == '' and$_GET['description'] == '' and$_GET['name'] == '')
-            {
-                while ($cat = mysqli_fetch_assoc($result)) {
-
-                    $img_path = "catalog_images/" . $cat['img_path'];
-                    $name = $cat['name'];
-                    $category = $cat['id_product_category'];
-                    $description = $cat['description'];
-                    $cost = $cat['cost'];
-                    $id_category = mysqli_query($connection, "SELECT `name_category` FROM `product_category` WHERE `id_product_category` = $category");
-                    $name_category = mysqli_fetch_assoc($id_category);
-
-                    echo "<tr>";
-                    // изображение
-                    echo "<th scope='row'><img src='$img_path' width='200px'></th>";
-                    // название
-                    echo "<td>$name</td>";
-                    // категория
-                    echo "<td>" . $name_category['name_category'] . "</td>";
-                    // описание
-                    echo "<td>$description</td>";
-                    // стоимость
-                    echo "<td>$cost</td>";
-                    echo "</tr>";
-                }
-            }
-            else{
-                $k = 0;
-                if ($_GET['costFrom'] > $_GET['costTo'])
-                {
-                    echo "<h2>Неверный формат ввода</h2><br>";
-                    $k++;
-                }
-                while ($cat = mysqli_fetch_assoc($result)) {
-                    if ($_GET['costFrom'] == '' or $cat['cost'] >= $_GET['costFrom'])
-                    {
-                        if ($_GET['costTo'] == '' or $cat['cost'] <= $_GET['costTo'])
-                        {
-                            if ($_GET['category'] == '' or $cat['id_product_category'] == $_GET['category'])
-                            {
-                                if ($_GET['description'] == '' or stripos($cat['description'],$_GET['description'],0))
-                                {
-                                    if ($_GET['name'] == '' or stripos($cat['name'],$_GET['name'],0))
-                                    {
-                                        $img_path = "catalog_images/" . $cat['img_path'];
-                                        $name = $cat['name'];
-                                        $category = $cat['id_product_category'];
-                                        $description = $cat['description'];
-                                        $cost = $cat['cost'];
-                                        $id_category = mysqli_query($connection, "SELECT `name_category` FROM `product_category` WHERE `id_product_category` = $category");
-                                        $name_category = mysqli_fetch_assoc($id_category);
-
-                                        echo "<tr>";
-                                        // изображение
-                                        echo "<th scope='row'><img src='$img_path' width='200px'></th>";
-                                        // название
-                                        echo "<td>$name</td>";
-                                        // категория
-                                        echo "<td>" . $name_category['name_category'] . "</td>";
-                                        // описание
-                                        echo "<td>$description</td>";
-                                        // стоимость
-                                        echo "<td>$cost</td>";
-                                        echo "</tr>";
-                                        $k++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if ($k == 0)
-                    echo "<h2>Ничего не найдено</h2><br>";
-            }
-
-            /*echo $_GET['costFrom'] . "<br>";// цена от
-            echo $_GET['costTo'] . "<br>";  // цена до
-            echo $_GET['category'] . "<br>";// категория
-            echo $_GET['description'] . "<br>";// описание
-            echo $_GET['name'] . "<br>";// название*/
-        }
-        mysqli_close($connection);
+            include 'logic.php';
         ?>
         </tbody>
     </table>
@@ -345,10 +232,6 @@
         </form>
     </div>
 </div>
-
-<p class="cemtf">
-    Заметили ошибку? Выделите текст ошибки, нажмите Ctrl+Enter, отправьте форму. Мы постараемся исправить ее.
-</p>
 
 <div class="row ssl jumbotron bv">
     <div class="col-md-2">
