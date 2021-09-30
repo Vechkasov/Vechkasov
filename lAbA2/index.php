@@ -1,22 +1,23 @@
 <?php
     require_once 'db.php';
+    require_once 'logic.php';
 ?>
 <!doctype html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Беседка</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <title>Беседка</title>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="/images/logo-short.svg" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link href="index.css" rel="stylesheet">
-    <script src="index.js"></script>
+    <script src="jes.js"></script>
 </head>
 <body>
 
@@ -143,35 +144,30 @@
         </div>
     </nav>
 
-    <form action="index.php" method="post" id="filter_form">
+    <form action="index.php" method="get" id="filter_form">
         <label>Фильтрация результата поиска</label>
         <div class="mb-3">
             <label>По цене:</label>
-            <input type="number" name="costFrom" placeholder="Цена от" value="" class="form-control">
-            <input type="number" name="costTo" placeholder="Цена до " value="" class="form-control mt-3">
+            <input type="number" id="costFrom" name="costFrom" placeholder="Цена от" value="" class="form-control">
+            <input type="number" id="costTo" name="costTo" placeholder="Цена до " value="" class="form-control mt-3">
         </div>
         <div class="mb-3">
             <label>Фильтрация по категории товара:</label>
-            <select name="category" class="form-control">
+            <select id="category" name="category" class="form-control">
+                <option value="" selected="">Выберите категорию</option>
                 <?php
-                    $one = $pdo->query('SELECT * FROM `product_category`');
-                    $i = 1;
-                    while ($row = $one->fetch(PDO::FETCH_ASSOC))
-                    {
-                        echo '<option value="' . $i .'" selected="">' . $row['name_category'] . '</option>';
-                        $i++;
-                    }
+                    // вывод категорий в выпадающий список
+                    echo $category;
                 ?>
-                <option value="0" selected="">Выберите категорию</option>
             </select>
         </div>
         <div class="mb-3">
             <label>Фильтрация по описанию:</label>
-            <textarea class="form-control" placeholder="Введите описание товара" name="description" value=""></textarea>
+            <textarea class="form-control" placeholder="Введите описание товара" id="description" name="description" value=""></textarea>
         </div>
         <div class="mb-3">
             <label>Фильтрация по наименованию:</label>
-            <input class="form-control" type="text" name="name" placeholder="Введите наименование товара" value="" >
+            <input class="form-control" type="text" name="name" id="name" placeholder="Введите наименование товара" value="" >
         </div>
         <div class="container">
             <input type="submit" onclick="save()" style="width: 220px" value="Применить фильтр" class="btn btn-primary">
@@ -193,7 +189,8 @@
         </thead>
         <tbody>
         <?php
-            include 'logic.php';
+            // вывод данных из БД
+            echo $text;
         ?>
         </tbody>
     </table>
