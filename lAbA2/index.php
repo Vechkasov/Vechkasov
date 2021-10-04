@@ -178,21 +178,23 @@
 
 <div class="container text-center mt-3">
     <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Изображение</th>
-                <th scope="col">Наименование</th>
-                <th scope="col">Категория</th>
-                <th scope="col">Описание</th>
-                <th scope="col">Стоимость</th>
-            </tr>
-        </thead>
-        <tbody>
         <?php
-            // вывод данных из БД
-            echo $text;
+        $enter = '';
+            if (!$fl)
+            {
+                $enter = '<thead>
+                        <tr>
+                            <th scope="col">Изображение</th>
+                            <th scope="col">Наименование</th>
+                            <th scope="col">Категория</th>
+                            <th scope="col">Описание</th>
+                            <th scope="col">Стоимость</th>
+                        </tr>
+                    </thead>';
+            }
+            echo $enter;
+            echo "<tbody>" . $text . "</tbody>";
         ?>
-        </tbody>
     </table>
 
 </div>

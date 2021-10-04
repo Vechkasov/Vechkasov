@@ -17,9 +17,12 @@
     // переменная для вывода на месте данных из БД
     $text = '';
 
+    // флаг - есть ли данные из БД для вывода
+    $fl = false;
+
     // выводит все данные из БД если очищаем фильтр
     // и если не вводим ничего в фильтр
-    if(isset($_GET["clearFilter"]))
+    if(isset($_GET["clearFilter"]) or !$_GET)
     {
         while ($row = $result->fetch(PDO::FETCH_ASSOC))
         {
@@ -32,7 +35,7 @@
                       "</tr>";
         }
     }
-    else
+    else if ($_GET)
     {
         $sqlFil = $sql;
         $zapros = array();
@@ -75,6 +78,7 @@
             if ($_GET['costFrom'] > $_GET['costTo']) {
                 $text = "<h2>Ошибка ввода (цена от больше цены до)</h2>";
                 $i = -1;
+                $fl = true;
             }
             else
             {
@@ -127,7 +131,11 @@
                 $count++;
             }
             if ($count == 0)
+            {
                 $text = "<h2>Ничего не найдено</h2>";
+                $fl = true;
+            }
+
         }
         else if ($i == 0)
         {
