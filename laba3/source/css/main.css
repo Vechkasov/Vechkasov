@@ -1,0 +1,271 @@
+.exit{
+    margin-left: 20px;
+
+}
+
+.camp
+{
+    padding: 2px;
+    color: black;
+    font-size: 20px;
+    transition:all .3s ease-out 0s;
+}
+.camp:hover
+{
+    color:#4a50e1;
+}
+body{
+    font-family: cursive;
+}
+.navbar li a {
+    font-size: 1em;
+    color: black;
+}
+div
+{
+    margin-top:5px;
+}
+button,.btn-outline-primary
+{
+    height: 40px;
+    width: 75px;
+}
+button, .btn-primary
+{
+    width: 100%;
+    margin-bottom:10px;
+    text-align: center;
+}
+.collapse
+{
+    justify-content: center;
+}
+.navbar
+{
+    justify-content: center;
+}
+.catalog-detail {
+    display: flex;
+    width: 7rem;
+    padding: 0 .75rem;
+    height: 2.75rem;
+    line-height: 2.9;
+    border: 1px solid #d2d2d2;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border : black solid 1px;
+    border-radius: 5px;
+}
+.buttons
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buttons button
+{
+    width: 175px;
+    height:50px;
+}
+.catalog-detail__qt-btn {
+    height: 2.75rem;
+    border: none;
+    padding: 0 .5rem;
+    cursor: pointer;
+    background: none;
+}
+.catalog-detail__qt-field {
+    float: left;
+    width: 2.4rem;
+    height: 100%;
+    border: 0;
+    text-align: center;
+}
+a.tip
+{
+    position: relative;
+    color: black;
+    cursor: pointer;
+    line-height: 1;
+    text-decoration: none;
+}
+a.tip:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: blue;
+    content: "";
+    transition: width 0.3s ease-out;
+}
+a.tip:hover:after,
+a.tip:focus:after {
+    width: 100%;
+}
+.cost
+{
+    color:black;
+    font-size: 4em
+}
+@media (min-width: 540px) and (max-width: 760px)
+{
+    .cost{
+        font-size:45px;
+    }
+    .ezji
+    {
+        font-size: 20px;
+    }
+    .ezjitwo
+    {
+        font-size: 20px;
+    }
+}
+@media (min-width: 540px) and (max-width: 750px)
+{
+
+}
+@media (min-width: 200px) and (max-width: 540px)
+{
+    .cost{
+        font-size:25px;
+    }
+    .ezji
+    {
+        font-size: 10px;
+    }
+    .ezjitwo
+    {
+        font-size: 10px;
+    }
+}
+.ssl p a
+{
+    color:rgba(0,0,0,.4);
+    font-size:14px;
+}
+.ssl p
+{
+    font-size: 20px;
+}
+.ssl{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.bv {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding-top: 10px;
+}
+.bobe a{
+    margin-left: 8px;
+}
+.hpf span{
+    color:rgba(0,0,0,.4);
+    font-size: 12px;
+}
+.qwer.hgjt{
+    font-size: 10px;
+    line-height: 1px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+.qwer p.hpf{
+    font-size: 15px;
+}
+.qwer .fir{
+    font-size: 20px;
+    color: black;
+}
+.log{
+    justify-content: center;
+    text-align: center;
+}
+.fghfd{
+    font-size: 19px;
+}
+.main{
+    margin-top:130px; text-align: center
+}
+.main span{
+    font-size: 10px;
+}
+.main span a{
+    color:#A9A9A9;
+}
+.jim{
+    margin-top:30px;
+}
+.jim p {
+    text-align: justify;
+}
+.carous{
+    justify-content: center;
+    text-align: center;
+}
+.dvij{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.dvij div{
+    float:left;
+ }
+.jimv{
+    margin-top: 20px;
+    display: none;
+}
+.jimv>ul>li>div{
+    text-align: justify;
+}
+.jimv ul li .char {
+    text-align: left;
+    margin-left: 25px;
+}
+.name
+{
+    color:black;
+    font-size: 28px;
+}
+.poi>p>a
+{
+    color:#A9A9A9;
+    font-size:14px;
+}
+.black{
+    color:black;
+}
+.jim>div>div{
+    text-align:center;
+}
+.cen{
+    text-align: center;
+    margin-top: 10px;
+}
+.cemtf{
+    color: rgba(0,0,0,.4);
+    margin-top: 20px;
+}
+.buta{
+    margin-top: 10px;
+    color: darksalmon;
+    border:black solid 0.5px;
+    border-radius: 10px;
+}
+.gdsfsd{
+    text-align: left;
+    font-size:12px;
+    justify-content: left;
+    padding-right: 30px;
+}
+.ezji{
+    margin-top: 10px;
+}
+.spic > ul {
+    float: left;
+    margin-right: 100px ;
+}
+
