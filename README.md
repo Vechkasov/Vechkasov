@@ -7,7 +7,6 @@
 * скринкаст
 * нужную валидацию пароля (у меня он только отсекает кириллицу)
 * не вынес nav и footer в отдельные файлы
-* для секретной страницы сделаю профиль, открывающийся только после входа на сайте
 
 ### LINKS ###
 ##### https://vk.com/away.php?to=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1BfyfDoXevhptkXNG6CLbO1QadLINFug4o2ey5ChTW8w%2Fedit%23&cc_key= ##### 
