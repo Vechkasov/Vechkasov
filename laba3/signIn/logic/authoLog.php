@@ -1,14 +1,12 @@
 <?php
 
-    //$_SESSION['guest']['lock'] = false;
-    //$_SESSION['guest']['try'] = 0;
-
     // дополнительные данные
     $isEmptyLogin = false;
     $isEmptyPassword = false;
     $classLog = "";
     $classPas = "";
     $error = "";
+
 
     // если пользователь уже заблокирован
     if ($_SESSION['guest']['lock'])
@@ -28,6 +26,7 @@
             $_SESSION['guest']['try'] = 0;
         }
     }
+
 
     // если запрос есть и пользователь не заблокирован
     if ($_POST and !$_SESSION['guest']['lock'])
@@ -56,11 +55,11 @@
 
             // В теории больше 1 записи не должно быть найдено
             // т.к. логин и почта при регистрации проверяются на уникальность
-            if ($count == 1)
+            if ($count > 1)
             {
                 // вход выполнен
                 $_SESSION['user'] = $login;
-                header("Location:../first.php");
+                header("Location:../second.php");
             }
             else
             {
@@ -95,9 +94,11 @@
             $error = "У вас осталось " . (3 - $_SESSION['guest']['try']) . " попыток";
     }
 
+
     if ($_SESSION['guest']['try'] == 3 and !$_SESSION['guest']['lock'])
     {
         $_SESSION['guest']['lock'] = true;
         $_SESSION['guest']['time'] = time();
     }
+
 

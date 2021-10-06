@@ -2,7 +2,6 @@
     session_start();
 
     // выход, удаление логина пользователя
-    //unset($_SESSION['user']);
     $_SESSION['user'] = "";
 
     $_SESSION['guest'] = array(
@@ -13,4 +12,4 @@
         // с какого времени заблокирован
         'time' =>0
     );
-    header('Location:../first.php');
+    header('Location:../second.php');
