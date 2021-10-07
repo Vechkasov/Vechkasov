@@ -29,7 +29,7 @@
         ?>
         <button type="submit" onclick="save()" name="enter" class="login-btn">Войти</button>
         <p>У вас нет аккаунта? - <a href="reg.php">зарегистрируйтесь</a>!</p>
-        <p>Назад, на <a href="../first.php">главную</a>!</p>
+        <p>Назад, на <a href="../index.php">главную</a>!</p>
     </form>
 
 </body>

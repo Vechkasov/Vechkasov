@@ -62,7 +62,7 @@
             {
                 // вход выполнен
                 $_SESSION['user'] = $login;
-                header("Location:../second.php");
+                header("Location:../filter.php");
             }
             else
             {

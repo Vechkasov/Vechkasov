@@ -68,7 +68,7 @@
         <button type="submit" class="register-btn" onclick="save()">Зарегистрироваться</button>
 
         <p>У вас уже есть аккаунт? - <a href="autho.php">авторизируйтесь</a>!</p>
-        <p>Назад, на <a href="../first.php">главную</a>!</p>
+        <p>Назад, на <a href="../index.php">главную</a>!</p>
     </form>
 
 </body>
