@@ -13,5 +13,5 @@ window.onload = function()
         let login = JSON.parse(local);
         document.getElementById('login').value = login.login;
     }
-    localStorage.removeItem('login');
+    //localStorage.removeItem('login');
 }

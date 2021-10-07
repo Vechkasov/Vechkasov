@@ -41,5 +41,5 @@ window.onload = function()
         document.getElementById("blood_type").value = r.blood_type;
         document.getElementById("rhesus_factor").value = r.rhesus_factor;
     }
-    localStorage.removeItem('register');
+    //localStorage.removeItem('register');
 }
