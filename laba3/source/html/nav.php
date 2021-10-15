@@ -2,8 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <title>Беседка</title>
@@ -12,15 +11,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="source/css/main.css">
+    <link rel="stylesheet" href="source/css/main2.css">
     <script src="source/js/index.js"></script>
+    <script src="source/js/jes.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="row">
             <div class="col log">
-                <a href="#">
                     <img src="source/images/logo-short.svg" alt="Кекс">
-                </a>
                 <svg class="header__logo-text" version="1.1" id="svg2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-1 0 398.2 83.9" style="enable-background:new 0 0 398.2 83.9;" width="381px" height="54px" fill="#000000" xml:space="preserve">
         <g id="g12" transform="translate(211.1484,32.7559)">
             <path class="header__logo-text-letter header__logo-text-letter_6 st0" id="path14" d="M-62.6,10.2l6.2,6.2l6.2-6.2L-56.5,4L-62.6,10.2z"></path>
@@ -147,4 +146,4 @@
                 </div>
             </div>
         </div>
-</body>
+</nav>

@@ -189,7 +189,7 @@ a.tip:focus:after {
     font-size: 19px;
 }
 .main{
-    margin-top:130px; text-align: center
+    text-align: center;
 }
 .main span{
     font-size: 10px;
