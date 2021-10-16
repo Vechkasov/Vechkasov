@@ -51,14 +51,14 @@
             );
 
             // ищем логин подходящий под логин или почту или сравниваем хэши паролей
-            $sql = 'SELECT * FROM `user` WHERE ((`login` = :login) OR (`email` = :login)) AND (`password` = :password)';
+            $sql = 'SELECT COUNT(*) FROM `user` WHERE ((`login` = :login) OR (`email` = :login)) AND (`password` = :password)';
             $stmt = $pdo->prepare($sql);
             $stmt->execute($zapros);
             $count = $stmt -> fetchColumn();
 
             // В теории больше 1 записи не должно быть найдено
             // т.к. логин и почта при регистрации проверяются на уникальность
-            if ($count > 1)
+            if ($count == 1)
             {
                 // вход выполнен
                 $_SESSION['user'] = $login;
