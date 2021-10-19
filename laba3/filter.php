@@ -1,8 +1,13 @@
 <?php
     session_start();
+    // Подключение к базе данных
     require_once 'source/logic/db.php';
+    // Обработка фильтра
     require_once 'source/logic/logic.php';
-    include_once "source/html/nav.php"?>
+    // Кусок HTML-кода (шапка)
+    require_once "source/html/nav.php"
+?>
+
 <div class="container">
     <form action="filter.php" method="get" id="filter_form">
         <label>Фильтрация результата поиска</label>
@@ -16,7 +21,7 @@
             <select id="category" name="category" class="form-control">
                 <option value="" selected="">Выберите категорию</option>
                 <?php
-                    // вывод категорий в выпадающий список
+                    // Вывод всех категорий из БД
                     echo $category;
                 ?>
             </select>
@@ -39,39 +44,14 @@
 <div class="container text-center mt-3">
     <table class="table">
         <?php
-        $enter = '';
-            if (!$fl)
-            {
-                if ($_SESSION['user'])
-                {
-                    $enter = '<thead>
-                                <tr>
-                                    <th scope="col">Изображение</th>
-                                    <th scope="col">Наименование</th>
-                                    <th scope="col">Категория</th>
-                                    <th scope="col">Описание</th>
-                                    <th scope="col">Стоимость</th>
-                                </tr>
-                            </thead>';
-                }
-                else
-                {
-                    $enter = '<h4>Авторизуйтесь для просмотра изображений</h4>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Наименование</th>
-                                    <th scope="col">Категория</th>
-                                    <th scope="col">Описание</th>
-                                    <th scope="col">Стоимость</th>
-                                </tr>
-                            </thead>';
-                }
-            }
-            echo $enter;
+            // Вывод данных из БД
             echo "<tbody>" . $text . "</tbody>";
         ?>
     </table>
 
 </div>
 
-<?php include_once "source/html/footer.php"?>
+<?php
+    // Кусок HTML-кода (подвал)
+    require_once "source/html/footer.php"
+?>

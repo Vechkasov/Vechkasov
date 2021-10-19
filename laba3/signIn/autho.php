@@ -1,6 +1,9 @@
 <?php
     session_start();
+    // Подключение к БД
     require_once "../source/logic/db.php";
+
+    // Логика авторизации
     require_once "logic/authoLog.php";
 ?>
 <!doctype html>

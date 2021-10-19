@@ -32,7 +32,8 @@
     </div>
 
 </div>
-<div class="row ssl jumbotron bv">
+</div>
+<div class="row ssl jumbotron bv container-fluid">
     <div class="col-md-2">
         <p>Каталог</p>
         <p><a href="" class="camp">Акции</a></p>
@@ -98,7 +99,6 @@
 
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>
