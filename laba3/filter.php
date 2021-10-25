@@ -1,9 +1,15 @@
 <?php
     session_start();
+
     // Подключение к базе данных
     require_once 'source/logic/db.php';
+
     // Обработка фильтра
-    require_once 'source/logic/logic.php';
+    require_once 'source/logic/logicFilter.php';
+
+    // Название страницы
+    $title = "Фильтр";
+
     // Кусок HTML-кода (шапка)
     require_once "source/html/nav.php"
 ?>
@@ -13,42 +19,81 @@
         <label>Фильтрация результата поиска</label>
         <div class="mb-3">
             <label>По цене:</label>
-            <input type="number" id="costFrom" name="costFrom" placeholder="Цена от" value="" class="form-control">
-            <input type="number" id="costTo" name="costTo" placeholder="Цена до " value="" class="form-control mt-3">
+            <input type="number" name="costFrom" placeholder="Цена от" value="<?= isset($toDataBase['costFrom'])?$toDataBase['costFrom']:"" ?>" class="form-control">
+            <input type="number" name="costTo" placeholder="Цена до " value="<?= isset($toDataBase['costTo'])?$toDataBase['costTo']:"" ?>" class="form-control mt-3">
         </div>
         <div class="mb-3">
             <label>Фильтрация по категории товара:</label>
-            <select id="category" name="category" class="form-control">
-                <option value="" selected="">Выберите категорию</option>
+            <select name="category" class="form-control">
+                <option value="" <?php if (!isset($toDataBase['category'])) : ?>selected <?php endif; ?> >Выберите категорию</option>
                 <?php
                     // Вывод всех категорий из БД
-                    echo $category;
+                    foreach ($category as $key => $item)
+                    {
+                        if (isset($toDataBase['category']) and  ( $toDataBase['category'] == ($key + 1) ))
+                            echo "<option value=" . ($key + 1) . " selected>$item</option>";
+                        else
+                            echo "<option value=" . ($key + 1) . ">$item</option>";
+                    }
                 ?>
             </select>
         </div>
         <div class="mb-3">
             <label>Фильтрация по описанию:</label>
-            <textarea class="form-control" placeholder="Введите описание товара" id="description" name="description" value=""></textarea>
+            <textarea class="form-control" placeholder="Введите описание товара" name="description"><?= isset($toDataBase['description'])?htmlspecialchars($toDataBase['description']):"" ?></textarea>
         </div>
         <div class="mb-3">
             <label>Фильтрация по наименованию:</label>
-            <input class="form-control" type="text" name="name" id="name" placeholder="Введите наименование товара" value="" >
+            <input class="form-control" type="text" name="name" placeholder="Введите наименование товара" value="<?= isset($toDataBase['name'])?htmlspecialchars($toDataBase['name']):"" ?>">
         </div>
-        <div class="container">
-            <input type="submit" onclick="save()" style="width: 220px" value="Применить фильтр" class="btn btn-primary">
-            <input type="submit" onclick="remove()" name="clearFilter" value="Очистить фильтр" class="btn btn-danger">
-        </div>
-
+        <input type="submit" value="Применить фильтр" class="btn btn-primary">
+        <input type="submit" name="clearFilter" value="Очистить фильтр" class="btn btn-danger">
     </form>
+</div>
 
 <div class="container text-center mt-3">
-    <table class="table">
-        <?php
-            // Вывод данных из БД
-            echo "<tbody>" . $text . "</tbody>";
-        ?>
-    </table>
+    <?php
+        if ($error) :
+    ?>
+            <!-- Вывод ошибки или отсутствия данных -->
+            <h2><?=$error?></h2>
+    <?php else: ?>
+        <!-- Вывод данных из БД -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <!-- Показывать картинки если пользователь авторизован -->
+                    <?php
+                    if (isset($_SESSION['user'])) :
+                    ?>
+                        <th scope=col>Изображения</th>
+                    <?php endif; ?>
+                        <th scope=col>Наименование</th>
+                        <th scope=col>Категория</th>
+                        <th scope=col>Описание</th>
+                        <th scope=col>Стоимость</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    foreach ($text as $key => $item) :
+                ?>
+                        <tr>
+                            <?php
+                                if (isset($_SESSION['user'])) :
+                            ?>
+                                <td><img width="200" src="<?=$item['img_path']?>"></td>
+                            <?php endif; ?>
+                                <td><?=$item['name']?></th>
+                                <td><?=$item['name_category']?></td>
+                                <td><?=$item['description']?></td>
+                                <td><?=$item['cost']?></td>
+                        </tr>
+                <?php endforeach; ?>
 
+            </tbody>
+        </table>
+    <?php endif; ?>
 </div>
 
 <?php

@@ -17,20 +17,23 @@
 <body>
     <form class="autho" action="autho.php" method="post">
         <label>Логин или email</label>
-        <input type="text" class="<?=$classLog?>" id="login" name="login" placeholder="Введите свой логин">
+        <input type="text" class="<?=$classLog?>" id="login" name="login" placeholder="Введите свой логин" value="<?= isset($login)?htmlspecialchars($login):"" ?>">
         <?php
+        // Вывести сообщение об отсутствии логина
         if ($isEmptyLogin)
             echo "<p class='msg'>Вы ничего не ввели</p>";
         ?>
         <label>Пароль</label>
         <input type="password" class="<?=$classPas?>" name="password" placeholder="Введите пароль">
         <?php
+        // Вывести сообщение об отсутствии пароля
         if ($isEmptyPassword)
             echo "<p class='msg'>Вы ничего не ввели</p>";
+        // Вывести ошибку входа
         else if ($error)
             echo "<p>" . $error . "</p>"
         ?>
-        <button type="submit" onclick="save()" name="enter" class="login-btn">Войти</button>
+        <button type="submit" name="enter" class="login-btn">Войти</button>
         <p>У вас нет аккаунта? - <a href="reg.php">зарегистрируйтесь</a>!</p>
         <p>Назад, на <a href="../index.php">главную</a>!</p>
     </form>

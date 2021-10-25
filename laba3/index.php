@@ -1,7 +1,13 @@
 <?php
+    // На этой странице сессия открывается только для проверки авторизации
     session_start();
+
+    // Название страницы
+    $title = "Главная";
+
+    // Кусок HTML-кода (шапка)
+    require_once "source/html/nav.php"
 ?>
-<?php include_once "source/html/nav.php"?>
     <div class="container">
         <div class="container main">
             <span>
@@ -15,10 +21,10 @@
         </div>
 
         <a href="#top" name="top"></a>
-        <div class="row jim">
+        <div class="row mt-3">
             <div class="col-7">
 
-                <div id="carousel" class="carousel slide" data-ride="carousel">
+                <div id="carousel" class="carousel slide text-center" data-ride="carousel">
                     <!-- Индикаторы -->
                     <ol class="carousel-indicators">
                         <li data-target="#carousel" data-slide-to="0" class="active"></li>
@@ -51,19 +57,19 @@
                     </a>
                 </div>
 
-                <div class="row dvij">
+                <div class="row ms-3 mt-5">
                     <div class="col-md-3">
-                        <a href="#top" onclick="one()" class="tip one">О товаре</a>
+                        <a href="#top" onclick="one()" class="linkUnderline one">О товаре</a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#top" onclick="two()" class="tip two">Характеристики</a>
+                        <a href="#top" onclick="two()" class="linkUnderline two">Характеристики</a>
                     </div>
                     <div class="col-md-3">
-                        <a href="#top" onclick="three()" class="tip three">О бренде</a>
+                        <a href="#top" onclick="three()" class="linkUnderline three">О бренде</a>
                     </div>
                 </div>
 
-                <div class="container onetext jim">
+                <div class="container oneText mt-4">
                     <p>
                         Модель Impulse — лучшая страховочная система CAMP для скалолазания.
                     </p>
@@ -82,7 +88,7 @@
                         снаряжения. Сзади расположена пятая петля, куда удобно подстегнуть запасное
                         снаряжение, вторую веревку или мешок с магнезией.
                     </p>
-                    <div class="spic">
+                    <div class="container">
                         <ul>
                             <li><p>инновационная технология пояса для большего комфорта;</p></li>
                             <li><p>перфорированная EVA подкладка обеспечивает превосходную вентиляцию;</p></li>
@@ -97,68 +103,57 @@
                     </div>
                 </div>
 
-                <div class="container twotext jimv">
-
+                <div class="container twoText mt-4">
                     <ul>
+
                         <li>
-                            <div>
-                                <span>Вес(кг)</span>
-                            </div>
-                            <span class="char">0.355</span>
+                            <span>Вес(кг)</span>
+                            <p class="ms-5">0.355</p>
                         </li>
 
                         <li>
-                            <div>
-                                <span>Тип</span>
-                            </div>
-                            <span class="char">Страховочная система</span>
+                            <span>Тип</span>
+                            <p class="ms-5">Страховочная система</p>
                         </li>
 
                         <li>
-                            <div>
-                                <span>Количество пряжек</span>
-                            </div>
-                            <span class="char">1</span>
+                            <span>Количество пряжек</span>
+                            <p class="ms-5">1</p>
                         </li>
 
                         <li>
-                            <div>
-                                <span>Слоты под кэритулы</span>
-                            </div>
-                            <span class="char">Нет</span>
+                            <span>Слоты под кэритулы</span>
+                            <p class="ms-5">Нет</p>
                         </li>
 
                         <li>
-                            <div>
-                                <span>Тип страховочной системы</span>
-                            </div>
-                            <span class="char">Нижняя</span>
+                            <span>Тип страховочной системы</span>
+                            <p class="ms-5">Нижняя</p>
                         </li>
 
                         <li>
-                            <div>
-                                <span>Сезон</span>
-                            </div>
-                            <span class="char">21</span>
+                            <span>Сезон</span>
+                            <p class="ms-5">21</p>
                         </li>
 
                         <li>
-                            <div>
-                                <span>Пол</span>
-                            </div>
-                            <span class="char">Унисекс</span>
+                            <span>Пол</span>
+                            <p class="ms-5">Унисекс</p>
                         </li>
 
                     </ul>
                 </div>
 
-                <div class="container threetext jimv">
+                <div class="container threeText mt-4">
                     <p><a href="#top" class="camp">Camp</a></p>
                     <p>
                         Компания C.A.M.P. основана в 1889 году в маленьком городке
                         Премана на севере Италии. Является одной из старейших компаний по производству
                         снаряжения для самых разных видов активностей, связанных с деятельностью на высоте:
-                        альпинизм, туризм, скалолазание, промышленный альпинизм, трейл-раннинг и мультиспорт. Продукция CAMP, CAMP Safety и CASSIN производится на 9-ти фабриках в Европе, Азии и Африке. 80% производится на экспорт. 20% всех сотрудников работают в отделе исследования и разработок, чем обеспечивается большое количество собственных патентов и изобретений. Основная специализация – создание самых функциональных, легких и технологичных образцов снаряжения.
+                        альпинизм, туризм, скалолазание, промышленный альпинизм, трейл-раннинг и мультиспорт.
+                        Продукция CAMP, CAMP Safety и CASSIN производится на 9-ти фабриках в Европе, Азии и Африке. 80% производится на экспорт.
+                        20% всех сотрудников работают в отделе исследования и разработок, чем обеспечивается большое количество собственных патентов и изобретений.
+                        Основная специализация – создание самых функциональных, легких и технологичных образцов снаряжения.
                     </p>
                 </div>
 
@@ -195,32 +190,37 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-6 buttons">
-                            <button type="button" class="btn btn-outline-primary">S</button>
-                        </div>
-                        <div class="col-6 buttons">
-                            <button type="button" class="btn btn-outline-primary">M</button>
-                        </div>
-                        <div class="col-6 buttons">
-                            <button type="button" class="btn btn-outline-primary">L</button>
-                        </div>
-                        <div class="col-6 buttons">
-                            <button type="button" class="btn btn-outline-primary">XL</button>
+                        <div class="col-md-3 col-xl-6 btn-group text-center buttonMy">
+                            <button class="btn btn-outline-primary ms-3">S</button>
+                            <button class="btn btn-outline-primary ms-3">M</button>
+                            <button class="btn btn-outline-primary ms-3">L</button>
+                            <button class="btn btn-outline-primary ms-3">XL</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="catalog-detail container">
-                    <button onclick="minus()" type="button" class="catalog-detail__qt-btn catalog-detail__qt-btn_minus">-</button>
-                    <input class="catalog-detail__qt-field" autocomplete="off" name="quantity" type="text" placeholder="1" value="1">
-                    <button onclick="plus()" type="button" class="catalog-detail__qt-btn catalog-detail__qt-btn_plus">+
-                    </button>
+                <div class="container count mt-3">
+                    <div class="catalog-detail container">
+                        <button onclick="minus()" type="button" class="catalog-detail__qt-btn catalog-detail__qt-btn_minus">-</button>
+                        <input class="catalog-detail__qt-field" autocomplete="off" name="quantity" type="text" placeholder="1" value="1">
+                        <button onclick="plus()" type="button" class="catalog-detail__qt-btn catalog-detail__qt-btn_plus">+
+                        </button>
+                    </div>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-lg ezji"   >В корзину</button>
-                <button type="button" class="btn btn-outline-secondary ezjitwo">К сравнению</button>
+                <div class="container">
+                    <div class="row">
+                        <div class="btn-group col-10 buttonUnder">
+                            <button type="button" class="btn btn-primary">В корзину</button>
+                            <button type="button" class="btn btn-outline-secondary ms-2">К сравнению</button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
     </div>
-<?php include_once "source/html/footer.php"?>
+<?php
+    // Кусок HTML-кода (подвал)
+    include_once "source/html/footer.php"
+?>

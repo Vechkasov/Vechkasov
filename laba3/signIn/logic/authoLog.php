@@ -30,26 +30,26 @@
     }
 
 
-    // если запрос есть и пользователь не заблокирован
+    // Усли запрос есть и пользователь не заблокирован
     if ($_POST and !$_SESSION['guest']['lock'])
     {
         // читабельность
         $login = $_POST["login"];
         $password = $_POST["password"];
 
-        // если поля не пустые
-        if ($login != '' and $password!='')
+        // Усли поля не пустые
+        if ($login != '' and $password != '')
         {
-            // хэшируем пароль
+            // Хэшируем пароль
             $password = md5($password);
 
-            // создаем запрос для запроса поиска подходящих записей в БД
+            // Создаем запрос для запроса поиска подходящих записей в БД
             $zapros = array(
                 'login' => $login,
                 'password' => $password
             );
 
-            // ищем логин подходящий под логин или почту или сравниваем хэши паролей
+            // Ищем логин подходящий под логин или почту или сравниваем хэши паролей
             $sql = 'SELECT COUNT(*) FROM `user` WHERE ((`login` = :login) OR (`email` = :login)) AND (`password` = :password)';
             $stmt = $pdo->prepare($sql);
             $stmt->execute($zapros);
@@ -59,6 +59,7 @@
             // т.к. логин и почта при регистрации проверяются на уникальность
             if ($count == 1)
             {
+                unset($_SESSION['guest']);
                 // вход выполнен
                 $_SESSION['user'] = $login;
                 header("Location:../filter.php");
@@ -66,23 +67,31 @@
             else
             {
                 $_SESSION['guest']['try']++;
+                // Если попытки есть не блокировать пользователя
                 if ($_SESSION['guest']['try'] < 3)
                     $error = "Неверный логин или пароль, осталось " . (3 - $_SESSION['guest']['try']) . " попыток";
+                // Заблокировать если они закончились
                 else
+                {
                     $error = "У вас не осталось попыток";
+                    $_SESSION['guest']['lock'] = true;
+                    // Зафиксировать время блокировки
+                    $_SESSION['guest']['time'] = time();
+                    $error = $error . "Вы сможете попробовать войти ещё раз в " . date("H:i:s",$timeLock + 7200);
+                }
             }
 
         }
-        // обработка отправки пустой формы
+        // Обработка отправки пустой формы
         else
         {
-            // не ввели логин
+            // Не ввели логин
             if ($login === '')
             {
                 $isEmptyLogin = true;
                 $classLog = "error";
             }
-            // не ввели пароль
+            // Не ввели пароль
             if ($password === '')
             {
                 $isEmptyPassword = true;
@@ -94,13 +103,6 @@
     {
         if ($_SESSION['guest']['try'] > 0 and $_SESSION['guest']['try'] < 3)
             $error = "У вас осталось " . (3 - $_SESSION['guest']['try']) . " попыток";
-    }
-
-
-    if ($_SESSION['guest']['try'] == 3 and !$_SESSION['guest']['lock'])
-    {
-        $_SESSION['guest']['lock'] = true;
-        $_SESSION['guest']['time'] = time();
     }
 
 

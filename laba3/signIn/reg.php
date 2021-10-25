@@ -17,34 +17,34 @@
     <form class="autho" action="reg.php" method="post">
         <h4>Форма регистрации (* - обязательные поля)</h4>
         <label>ФИО*</label>
-        <input type="text" class="<?= $msq['full_name']? "error": '';?>" name="full_name" placeholder="Введите свое полное имя" id="full_name">
+        <input type="text" class="<?= $msq['full_name']? "error": '';?>" name="full_name" placeholder="Введите свое полное имя" value="<?= isset($full_name)? htmlspecialchars($full_name): ''; ?>">
         <?php
         if ($msq['full_name'])
             echo "<p class='msg'>" . $msq['full_name'] . "</p>";
         ?>
         <label>Логин*</label>
-        <input type="text" class="<?= $msq['login']? "error": '';?>" name="login" placeholder="Введите свой логин" id="login">
+        <input type="text" class="<?= $msq['login']? "error": '';?>" name="login" placeholder="Введите свой логин" value="<?= isset($login)? htmlspecialchars($login): ''; ?>">
         <?php
         if ($msq['login'])
             echo "<p class='msg'>" . $msq['login'] . "</p>";
         ?>
         <label>Почта*</label>
-        <input type="email" class="<?= $msq['email']? "error": '';?>" name="email" placeholder="Введите адрес своей почты" id="email">
+        <input type="email" class="<?= $msq['email']? "error": '';?>" name="email" placeholder="Введите адрес своей почты" value="<?= isset($email)? htmlspecialchars($email): ''; ?>">
         <?php
         if ($msq['email'])
             echo "<p class='msg'>" . $msq['email'] . "</p>";
         ?>
         <label>Пароль*</label>
-        <input type="password" class="<?= $msq['password']? "error": '';?>" name="password" placeholder="Введите пароль" id="password">
+        <input type="password" class="<?= $msq['password']? "error": '';?>" name="password" placeholder="Введите пароль">
         <?php
         if ($msq['password'])
             echo "<p class='msg'>" . $msq['password'] . "</p>";
         ?>
         <label>Подтверждение пароля*</label>
-        <input type="password" class="<?= $msq['check_password']? "error": '';?>" name="password_confirm" placeholder="Подтвердите пароль" id="password_confirm">
+        <input type="password" class="<?= $msq['password_confirm']? "error": '';?>" name="password_confirm" placeholder="Подтвердите пароль">
         <?php
-        if ($msq['check_password'])
-            echo "<p class='msg'>" . $msq['check_password'] . "</p>";
+        if ($msq['password_confirm'])
+            echo "<p class='msg'>" . $msq['password_confirm'] . "</p>";
         ?>
 
         <label>Дата рождения</label>

@@ -1,12 +1,12 @@
 <?php
 
-    // обрабатывает ошибки отправки формы на сервере (теперь)
+    // Обрабатывает ошибки отправки формы на сервере (теперь)
 
     // сначала смотрит, все ли важные поля заполнены
     // только потом проверяет их на уникальность и соответствие
     // после отправки формы данные остаются на своих местах (кроме пароля)
 
-    // сообщения об ошибках
+    // Сообщения об ошибках
     $msq = array(
         'full_name'=>'',
         'login'=>'',
@@ -15,22 +15,23 @@
         'email' =>''
     );
 
-    // количество ошибок
+    // Количество ошибок
     $countE = 0;
 
-    // сообщение об ошибке регистрации
+    // Сообщение об ошибке регистрации
     $msg_err = '';
 
+    // Если все важные поля заполнены
     if ($_POST and $_POST['login'] and $_POST['full_name'] and $_POST['password'] and $_POST['password_confirm'] and $_POST['email'])
     {
-        // для читабельности
+        // Для читабельности
         $login = $_POST['login'];
         $full_name = $_POST['full_name'];
         $password = $_POST['password'];
         $password_confirm = $_POST['password_confirm'];
         $email = $_POST['email'];
 
-        // проверка валидности имени
+        // Проверка валидности имени
         if(!preg_match("/^[а-яё\s]+$/iu", $full_name))
         {
             $msq['full_name'] = "Некорректное имя пользователя";
@@ -38,13 +39,13 @@
         }
         else
         {
-            // отправляем запрос
+            // Отправляем запрос
             $zapros = array('full_name' => $full_name);
             $sql = 'SELECT * FROM `user` WHERE `full_name` = :full_name';
             $stmt = $pdo->prepare($sql);
             $stmt->execute($zapros);
 
-            // смотрим, есть ли регистрация по этой же почте
+            // Смотрим, есть ли регистрация по этой же почте
             $count = $stmt->rowCount();
             if ($count > 0)
             {
@@ -53,22 +54,22 @@
             }
         }
 
-        // проверка валидности логина
+        // Проверка валидности логина
         if(!preg_match("/^[a-z0-9_-]{2,20}$/i", $login))
         {
             $msq['login'] = "Логин может состоять только из английских символов, а также - и _";
             $countE++;
         }
-        // проверка отсутствия такого логина в БД
+        // Проверка отсутствия такого логина в БД
         else
         {
-            // отправляем запрос
+            // Отправляем запрос
             $zapros = array('login' => $login);
             $sql = 'SELECT * FROM `user` WHERE `login` = :login';
             $stmt = $pdo->prepare($sql);
             $stmt->execute($zapros);
 
-            // смотрим, есть ли регистрация по этой же почте
+            // Смотрим, есть ли регистрация по этой же почте
             $count = $stmt->rowCount();
             if ($count > 0)
             {
@@ -77,22 +78,22 @@
             }
         }
 
-        // проверка валидности адреса почты
+        // Проверка валидности адреса почты
         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             $msq['email'] = "Адрес почты указан неверно";
             $countE++;
         }
-        // проверка отсутствия регистрации по указанной почте
+        // Проверка отсутствия регистрации по указанной почте
         else
         {
-            // отправляем запрос
+            // Отправляем запрос
             $zapros = array('email' => $email);
             $sql = 'SELECT * FROM `user` WHERE (`email` = :email)';
             $stmt = $pdo->prepare($sql);
             $stmt->execute($zapros);
 
-            // смотрим, есть ли регистрация по этой же почте
+            // Посмотрим, есть ли регистрация по этой же почте
             $count = $stmt->rowCount();
             if ($count > 0)
             {
@@ -101,21 +102,21 @@
             }
         }
 
-        // проверка валидности пароля
-        // проверка отсутствия русских букв
+        // Проверка валидности пароля
+        // Проверка отсутствия русских букв
         if (preg_match('/[а-яА-Я]/',$password))
         {
             $msq['password'] = "Пароль не может содержать русских букв";
             $countE++;
         }
-        // проверка размерности пароля
+        // Проверка размерности пароля
         else if(strlen($password) < 7)
         {
             $msq['password'] = "Пароль должен быть длиннее 6 символов";
             $countE++;
         }
 
-        // проверка совпадения паролей
+        // Проверка совпадения паролей
         if( !($password == $password_confirm) )
         {
             $msq['check_password'] = "Пароли не совпадают";
@@ -123,17 +124,17 @@
         }
 
 
-        // добавляем запись в БД если ошибок при вводе не было
+        // Добавляем запись в БД если ошибок при вводе не было
         if ($countE == 0)
         {
-            // хэшируем пароль
+            // Хэшируем пароль
             $password = md5($password);
 
-            // корректная запись даты в БД
+            // Корректная запись даты в БД
             $date = $_POST['date'];
             $date = date('Y-m-d');
 
-            // массив для запроса
+            // Массив для запроса
             $zapros = array(
                 'login' => $login,
                 'full_name' => $full_name,
@@ -141,12 +142,12 @@
                 'email' => $email
             );
 
-            // создание запроса
+            // Создание запроса
             $sql = "INSERT INTO `user` ";
             $list = " (`login`,`full_name`,`password`,`email`";
             $values = " VALUES (:login, :full_name, :password,  :email";
 
-            // отправляет дату в БД, иначе записывается NULL
+            // Отправляет дату в БД, иначе записывается NULL
             if (!empty($_POST['date']))
             {
                 $date = $_POST['date'];
@@ -155,35 +156,35 @@
                 $list = $list . ", `date_of_birth`";
                 $values = $values . ", :date";
             }
-            // отправляет адрес в БД, иначе записывается NULL
+            // Отправляет адрес в БД, иначе записывается NULL
             if (!empty($_POST['address']))
             {
                 $zapros['address'] = $_POST['address'];
                 $list = $list . ", `address`";
                 $values = $values . ", :address";
             }
-            // отправляет интересы в БД, иначе записывается NULL
+            // Отправляет интересы в БД, иначе записывается NULL
             if (!empty($_POST['$interest']))
             {
                 $zapros['interest'] = $_POST['interest'];
                 $list = $list . ", `interests`";
                 $values = $values . ", :interest";
             }
-            // отправляет ссылку на вк в БД, иначе записывается NULL
+            // Отправляет ссылку на вк в БД, иначе записывается NULL
             if (!empty($_POST['link_to_VK']))
             {
                 $zapros['linkToVk'] = $_POST['linkToVK'];
                 $list = $list . ", `link_to_VK`";
                 $values = $values . ", :linkToVk";
             }
-            // отправляет группу крови в БД, иначе записывается NULL
+            // Отправляет группу крови в БД, иначе записывается NULL
             if (!empty($_POST['blood_type']))
             {
                 $zapros['blood_type'] = $_POST['blood_type'];
                 $list = $list . ", `blood_type`";
                 $values = $values . ", :blood_type";
             }
-            // отправляет резус-фактор в БД, иначе записывается NULL
+            // Отправляет резус-фактор в БД, иначе записывается NULL
             if (!empty($_POST['rhesus_factor']))
             {
                 $zapros['rhesus_factor'] = $_POST['rhesus_factor'];
@@ -199,27 +200,33 @@
             $stmt = $pdo->prepare($sql);
             $stmt->execute($zapros);
 
-            // сбросим блокировку и попытки после регистрации
+            // Сбросим блокировку и попытки после регистрации
             $_SESSION['guest']['lock'] = false;
             $_SESSION['guest']['try'] = 0;
 
             header("Location:autho.php");
         }
-        // если была ошибка при вводе
+        // Если была ошибка при вводе
         else
             $msg_err = "Ошибка регистрации";
     }
-    // выводы о ошибках если поле пусто
+    // Выводы об ошибках если поле пусто
     else if ($_POST)
     {
         if (!$_POST['login'])
             $msq['login'] = "Вы ничего не ввели";
+        else
+            $login = $_POST['login'];
         if (!$_POST['full_name'])
             $msq['full_name'] = "Вы ничего не ввели";
+        else
+            $full_name = $_POST['full_name'];
         if (!$_POST['email'])
             $msq['email'] = "Вы ничего не ввели";
-        if (!$_POST['password_confirm'])
-            $msq['password_confirm'] = "Вы ничего не ввели";
+        else
+            $email = $_POST['email'];
         if (!$_POST['password'])
             $msq['password'] = "Вы ничего не ввели";
+        if (!$_POST['password_confirm'])
+            $msq['password_confirm'] = "Вы ничего не ввели";
     }

@@ -12,37 +12,51 @@ function plus() {
 }
 
 function one() {
-    $('.onetext').css({
+    $('.oneText').css({
         'display':'block'
     });
-    $('.twotext').css({
+    $('.twoText').css({
         'display':'none'
     });
-    $('.threetext').css({
+    $('.threeText').css({
         'display':'none'
     });
 }
 
 function two() {
-    $('.onetext').css({
+    $('.oneText').css({
         'display':'none'
     });
-    $('.twotext').css({
+    $('.twoText').css({
         'display':'block'
     });
-    $('.threetext').css({
+    $('.threeText').css({
         'display':'none'
     });
 }
 
 function three() {
-    $('.onetext').css({
+    $('.oneText').css({
         'display':'none'
     });
-    $('.twotext').css({
+    $('.twoText').css({
         'display':'none'
     });
-    $('.threetext').css({
+    $('.threeText').css({
         'display':'block'
+    });
+}
+
+window.onload = function()
+{
+    // Для 1-ой лабы
+    $('.oneText').css({
+        'display':'block'
+    });
+    $('.twoText').css({
+        'display':'none'
+    });
+    $('.threeText').css({
+        'display':'none'
     });
 }
