@@ -286,3 +286,7 @@ a.linkUnderline:focus:after {
     font-family: "Gill Sans", sans-serif;
     font-size: 20px;
 }
+
+.question_ul {
+    display: none;
+}
