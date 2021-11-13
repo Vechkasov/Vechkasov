@@ -290,3 +290,7 @@ a.linkUnderline:focus:after {
 .question_ul {
     display: none;
 }
+
+.reccurent_text{
+    background-color: burlywood;
+}

@@ -7,5 +7,5 @@
     session_destroy();
 
     // Редирект на страницу с фильтром
-    header('Location:filter.php');
+    header('Location:../filter.php');
     exit();

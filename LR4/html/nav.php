@@ -1,14 +1,6 @@
 <?php
     session_start();
-
-    /*if (!isset($_SESSION['user']) && $title != "Авторизация" && $title != "Регистрация")
-    {
-        header("Location: authorization.php");
-        exit();
-    }*/
-
     require_once("logic/db.php");
-
 ?>
 
 <!doctype html>

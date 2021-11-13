@@ -1,5 +1,5 @@
 <?php
-    if ($title != "Авторизация" && $title != "Регистрация") :
+    if ($title != "Авторизация" && $title != "Регистрация" && $title != "Текст") :
 ?>
 
         <div class="container mt-4 pt-4">

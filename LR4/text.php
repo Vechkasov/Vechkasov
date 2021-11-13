@@ -37,7 +37,7 @@
         <form class="authorization_form" action="text.php" method="post">
 
             <label class="pt-3">Введите ваш HTML-код</label>
-            <textarea name="text" class="form-control" cols="30" rows="4" placeholder="Ваш код"><?= !empty($_POST['text'])?htmlspecialchars($_POST['text']):$html; ?></textarea>
+            <textarea name="text" class="form-control" cols="30" rows="4" placeholder="Ваш код"><?= isset($html)?htmlspecialchars($html):""; ?></textarea>
 
             <button type="submit" class="btn btn-outline-success register-btn mt-3 pt-1">Отправить</button>
         </form>
@@ -48,14 +48,14 @@
         ?>
             <label>Получили : </label>
 
-            <div class="form-control container mb-5"><?=!empty($html)?$html:""?></div>
+            <div class="form-control container mb-2"><?=!empty($html)?$html:""?></div>
 
             <?php
                 if (!empty($images_array)) :
             ?>
                 <ul class="pt-4 list-group mb-5">
                 <?php
-                    for($j = 0;$j < $i ; $j++) :
+                    for($j = 0; $j < $i ; $j++) :
                 ?>
                     <li class="list-group-item">
                         <a href="<?="#" . $j?>">Картина <?=($j+1)?>  <?=$images_array[$j]?></a>
@@ -69,11 +69,14 @@
             ?>
 
 
-        <?php else : ?>
+        <?php elseif ($_POST) : ?>
 
             <p class="text-center fs-1 text-danger pt-3">Вы ничего не ввели</p>
 
         <?php endif; ?>
     </div>
 
+<?php
+    require_once("html/footer.php");
+?>
 
