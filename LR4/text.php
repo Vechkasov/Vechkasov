@@ -7,7 +7,6 @@
     <div class="text_body d-flex align-items-center flex-column pt-3">
 
         <div class="container">
-
             <button type="submit" class="text-center btn btn-outline-primary question mt-3 pt-1">Показать варианты задания</button>
 
             <ul class="pt-3 list-group question_ul">
@@ -34,10 +33,10 @@
                 </li>
             </ul>
         </div>
-        <form class="authorization_form" action="text.php" method="post">
 
+        <form class="authorization_form" action="text.php" method="post">
             <label class="pt-3">Введите ваш HTML-код</label>
-            <textarea name="text" class="form-control" cols="30" rows="4" placeholder="Ваш код"><?= isset($html)?htmlspecialchars($html):""; ?></textarea>
+            <textarea name="text" class="form-control" cols="30" rows="4" placeholder="Ваш код"><?= isset($html)?htmlspecialchars_decode($html):""; ?></textarea>
 
             <button type="submit" class="btn btn-outline-success register-btn mt-3 pt-1">Отправить</button>
         </form>
@@ -55,7 +54,7 @@
             ?>
                 <ul class="pt-4 list-group mb-5">
                 <?php
-                    for($j = 0; $j < $i ; $j++) :
+                    for($j = 0; $j < count($images_array) ; $j++) :
                 ?>
                     <li class="list-group-item">
                         <a href="<?="#" . $j?>">Картина <?=($j+1)?>  <?=$images_array[$j]?></a>

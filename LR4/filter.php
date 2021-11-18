@@ -93,5 +93,5 @@
 
 <?php
     // Кусок HTML-кода (подвал)
-    require_once("footer.php");
+    require_once("html/footer.php");
 ?>
