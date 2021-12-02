@@ -34,46 +34,56 @@
                 return false;
     }
 
-    /*
-        Обновляет таблицу, заполняя новыми данными
-    */
-    function update_table($content, $pdo)
+    function add_table($content,$pdo)
     {
-        $count = 0;
-        $sql = "DELETE FROM product_export;ALTER TABLE product_export AUTO_INCREMENT=0;";
-        $pdo->query($sql);
-        if (count($content) > 1 && isset($content[0]))
+        $add = 0;
+        $update = 0;
+        // Если записей много
+        if (count($content) > 1 && isset($content[0]['name']))
         {
+            // Записываем новые данные в продукты со схожими именами
             for($i = 0; $i < count($content) ; $i++)
             {
-                $sql = "INSERT INTO product_export(name,description,cost,img_path,id_product) VALUES (:name,:description,:cost,:img_path,:id_product)";
-                $to_database = array(
-                    'name' => $content[$i]['name'],
-                    'description' => $content[$i]['description'],
-                    'cost' => $content[$i]['cost'],
-                    'img_path' => $content[$i]['img_path'],
-                    'id_product' => $content[$i]['id_product']
-                );
+                $sql =  "UPDATE product_export " .
+                    "SET img_path = :img_path, id_product = :id_product, cost = :cost, description = :description " .
+                    "WHERE name = :name ";
                 $stmt = $pdo->prepare($sql);
-                if ($stmt->execute($to_database))
-                    $count++;
+                if ($stmt->execute($content[$i]))
+                {
+                    unset($content[$i]);
+                    $update++;
+                }
+                echo $update . " add";
             }
+            // Добавляем новые записи оставшихся продуктов
+            for($i = 0; $i < count($content) ; $i++)
+            {
+                if (isset($content[$i]))
+                {
+                    $sql =  "INSERT INTO product_export(img_path, name, id_product, cost, description)" .
+                        "VALUES(:img_path, :name, :id_product, :cost, :description)";
+                    $stmt = $pdo->prepare($sql);
+                    if ($stmt->execute($content))
+                        $add++;
+                }
+                echo $add . " add";
+            }
+            return "Изменено $update записей, добавлено $add записей";
         }
         else
         {
-            $sql = "INSERT INTO product_export(name,description,cost,img_path,id_product) VALUES (:name,:description,:cost,:img_path,:id_product)";
-            $to_database = array(
-                'name' => $content['name'],
-                'description' => $content['description'],
-                'cost' => $content['cost'],
-                'img_path' => $content['img_path'],
-                'id_product' => $content['id_product']
-            );
+            $sql =  "UPDATE product_export " .
+                "SET img_path = :img_path, id_product = :id_product, cost = :cost, description = :description " .
+                "WHERE name = :name ";
             $stmt = $pdo->prepare($sql);
-            if ($stmt->execute($to_database))
-                $count++;
+            if (!$stmt->execute($content)) {
+                $sql = "INSERT INTO product_export(img_path, name, id_product, cost, description)" .
+                    "VALUES(:img_path, :name, :id_product, :cost, :description)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute($content);
+            }
+            return 1;
         }
-        return $count;
     }
 
     /*
@@ -111,9 +121,9 @@
                 $message = "Ключи не совпадают";
             else
             {
-                $count = update_table($content, $pdo);
+                $count = add_table($content, $pdo);
                 if ($count > 0)
-                    $message = "Ваш файл был принят<br>Добавлено $count записи";
+                    $message = "Ваш файл был принят<br>$count";
                 else
                     $message = "Ошибка добавления записей";
             }
