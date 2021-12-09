@@ -1,7 +1,7 @@
 <?php
     $title = "Главная";
     require_once("html/nav.php");
-    $text = Database::getProducts();
+    $text = product_table::getProducts();
 ?>
 
     <div class="container mb-5 pb-3">

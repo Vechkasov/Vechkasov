@@ -37,14 +37,17 @@
         public static function connection(): \PDO{
             return static::getInstance()->connection;
         }
+    }
 
+    class product_table
+    {
         // Возвращает продукт из таблицы по указанному id
         public static function getProduct($id): array
         {
             $sql = "SELECT id, name, product_category.name_category, product.id_product, description, cost, img_path FROM product, product_category " .
                 "WHERE product.id_product = id_product_category AND product.id = :id";
 
-            $statement = static::connection()->prepare($sql);
+            $statement = Database::connection()->prepare($sql);
             $statement->bindValue(":id", $id);
             $statement->execute();
 
@@ -56,7 +59,7 @@
         {
             $sql = "SELECT id, name, name_category, description, cost, img_path FROM product, product_category " .
                 "WHERE product.id_product = id_product_category ORDER BY id";
-            $result = static::connection()->query($sql);
+            $result = Database::connection()->query($sql);
 
             // Для видимости объявляем массив тут
             $data = array();
@@ -78,7 +81,7 @@
         public static function getCategories(): array
         {
             $sql = "SELECT id_product_category, name_category FROM product_category";
-            $result = static::connection()->query($sql);
+            $result = Database::connection()->query($sql);
 
             // Для видимости объявляем массив тут
             $text = array();
@@ -103,10 +106,9 @@
                 $img_path       string
         */
         public static function addProduct($name, $description, $id_product, $cost, $img_path){
-            echo $name;
             $sql =  "INSERT INTO product(name, description, id_product, cost, img_path) ".
-                    "VALUES(:name, :description, :id_product, :cost, :img_path)";
-            $statement = static::connection()->prepare($sql);
+                "VALUES(:name, :description, :id_product, :cost, :img_path)";
+            $statement = Database::connection()->prepare($sql);
 
             $statement->bindValue(":name", $name);
             $statement->bindValue(":description", $description);
@@ -122,7 +124,7 @@
         {
             $sql = "SELECT id FROM product WHERE id = :id";
 
-            $statement = static::connection()->prepare($sql);
+            $statement = Database::connection()->prepare($sql);
             $statement->bindValue(":id", $id);
             $statement->execute();
 
@@ -146,10 +148,10 @@
 
             // Обновляем запись
             $sql =  "UPDATE Product " .
-                    "SET name = :name, description = :description, id_product = :id_product, cost = :cost, img_path = :img_path " .
-                    "WHERE id = :id ";
+                "SET name = :name, description = :description, id_product = :id_product, cost = :cost, img_path = :img_path " .
+                "WHERE id = :id ";
 
-            $statement = static::connection()->prepare($sql);
+            $statement = Database::connection()->prepare($sql);
 
             $statement->bindValue(":id", $id);
             $statement->bindValue(":name", $name);
@@ -158,8 +160,6 @@
             $statement->bindValue(":cost", $cost);
             $statement->bindValue(":img_path", $img_path);
 
-            echo " $id, $name, $description, $id_product, $cost, $img_path ";
-
             $statement->execute();
         }
 
@@ -167,7 +167,7 @@
         public static function deleteProductImage($id){
             $sql = "SELECT img_path FROM product WHERE id = :id";
 
-            $statement = static::connection()->prepare($sql);
+            $statement = Database::connection()->prepare($sql);
             $statement->bindValue(":id", $id);
             $statement->execute();
 
@@ -184,7 +184,7 @@
             // Удаляем запись из БД
             $sql = "DELETE FROM product WHERE id = :id";
 
-            $statement = static::connection()->prepare($sql);
+            $statement = Database::connection()->prepare($sql);
             $statement->bindValue(":id", $id);
             $statement->execute();
         }

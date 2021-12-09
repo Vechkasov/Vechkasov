@@ -1,8 +1,8 @@
 <?php
 
-    $category = Database::getCategories();
+    $category = product_table::getCategories();
 
-    if((isset($_GET['id']) && is_numeric($_GET['id']) && Database::checkId($_GET['id'])) || !isset($_GET['id']))
+    if((isset($_GET['id']) && is_numeric($_GET['id']) && product_table::checkId($_GET['id'])) || !isset($_GET['id']))
     {
         if ($_POST && $_POST['name'] && $_POST['description'] && $_POST['cost'] && $_POST['category'] && isset($_FILES['image']) && !empty($_FILES['image']['tmp_name']))
         {
@@ -38,9 +38,9 @@
                 fclose($handle);
 
                 if ($title == "Изменение")
-                    Database::editProduct(intval($_GET['id']), $_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
+                    product_table::editProduct(intval($_GET['id']), $_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
                 else if ($title == "Добавление")
-                    Database::addProduct($_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
+                    product_table::addProduct($_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
 
                 header("Location: index.php");
             }
@@ -57,7 +57,7 @@
                 $message['image'] = "Вы не отправили файл";
         }
         else if (isset($_GET['id']))
-            $text = Database::getProduct($_GET['id']);
+            $text = product_table::getProduct($_GET['id']);
     }
     else
         header("Location: index.php");
