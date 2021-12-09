@@ -32,7 +32,7 @@
                 $content = json_encode($text, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
                 // Записываем JSON в файл
-                $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/LR5/uploads/export.json", "w+");
+                $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "/LR5/uploads/" . $_POST['path'], "w+");
                 fwrite($fp, $content);
                 fclose($fp);
             }

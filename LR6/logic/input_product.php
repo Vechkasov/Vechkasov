@@ -2,7 +2,7 @@
 
     $category = Database::getCategories();
 
-    if(isset($_GET['id']) && is_numeric($_GET['id']) && Database::checkId($_GET['id']))
+    if((isset($_GET['id']) && is_numeric($_GET['id']) && Database::checkId($_GET['id'])) || !isset($_GET['id']))
     {
         if ($_POST && $_POST['name'] && $_POST['description'] && $_POST['cost'] && $_POST['category'] && isset($_FILES['image']) && !empty($_FILES['image']['tmp_name']))
         {
@@ -37,7 +37,11 @@
                 $content = fread($handle, filesize($new_name));
                 fclose($handle);
 
-                Database::editProduct(intval($_GET['id']), $_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
+                if ($title == "Изменение")
+                    Database::editProduct(intval($_GET['id']), $_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
+                else if ($title == "Добавление")
+                    Database::addProduct($_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
+
                 header("Location: index.php");
             }
         }
@@ -52,7 +56,7 @@
             if (isset($_FILES['image']) && empty($_FILES['image']['tmp_name']))
                 $message['image'] = "Вы не отправили файл";
         }
-        else
+        else if (isset($_GET['id']))
             $text = Database::getProduct($_GET['id']);
     }
     else
