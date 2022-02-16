@@ -1,2 +1,0 @@
-RewriteEngine on
-RewriteRule ^(.*)\.png$ check.php?src=$1 [R=301,L]
