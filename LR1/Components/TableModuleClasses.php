@@ -172,7 +172,6 @@
             // Массив с ошибками
             $message = array();
             if ($_POST) {
-                var_dump($_POST);
                 if (isset($_POST['name']) && empty(trim($_POST['name'])))
                     $message['name'] = "Вы не ввели название товара";
                 if (isset($_POST['cost']) && empty(intval($_POST['cost'])))
@@ -369,7 +368,6 @@
             if (CategoryTable::CheckId($_GET['id'])) {
                 if ($_POST)
                 {
-                    var_dump($_POST);
                     if (isset($_POST['flexRadioDefault']) and isset($_POST['categories']))
                         ProductTable::EditProductsWithCategory($_GET['id'], $_POST['categories']);
                     else
