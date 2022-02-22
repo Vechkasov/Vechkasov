@@ -3,8 +3,8 @@
 
     class ProductTable{
         public static function GetProductsWithCategory(int $id_product) : ?array{
-            $sql = "SELECT product.id, name, name_category, description, cost, img_path FROM product, product_category " .
-                "WHERE product.id_product = product_category.id AND product_category.id = :id_product ORDER BY product.id";
+            $sql = "SELECT product.id, name, name_category, description, cost, img_path FROM product JOIN product_category " .
+                "ON product.id_product = product_category.id WHERE product_category.id = :id_product ORDER BY product.id";
 
             // Для видимости объявляем массив тут
             $data = array();
@@ -28,8 +28,8 @@
             return $data;
         }
         public static function GetProducts() : ?array{
-            $sql = "SELECT product.id, name, name_category, description, cost, img_path FROM product, product_category " .
-                "WHERE product.id_product = product_category.id ORDER BY product.id";
+            $sql = "SELECT product.id, name, name_category, description, cost, img_path FROM product JOIN product_category " .
+                "ON product.id_product = product_category.id ORDER BY product.id";
             $result = Database::connection()->query($sql);
 
             // Для видимости объявляем массив тут
@@ -48,8 +48,8 @@
             return $data;
         }
         public static function GetProduct($id) : array{
-            $sql = "SELECT product.id, name, product_category.name_category, product.id_product, description, cost, img_path FROM product, product_category " .
-                "WHERE product.id_product = product_category.id AND product.id = :id";
+            $sql = "SELECT product.id, name, product_category.name_category, product.id_product, description, cost, img_path FROM product JOIN product_category " .
+                "ON product.id_product = product_category.id WHERE product.id = :id";
 
             $statement = Database::connection()->prepare($sql);
             $statement->bindValue(":id", $id);
@@ -171,51 +171,54 @@
         {
             // Массив с ошибками
             $message = array();
+            $pattern = '/[а-яёА-ЯЁa-zA-Z0-9&\s.,-]+$/u';
+
             if ($_POST) {
-                if (isset($_POST['name']) && empty(trim($_POST['name'])))
-                    $message['name'] = "Вы не ввели название товара";
-                if (isset($_POST['cost']) && empty(intval($_POST['cost'])))
-                    $message['cost'] = "Вы не ввели цену товара";
-                if (isset($_POST['description']) && empty(trim($_POST['description'])))
-                    $message['description'] = "Вы не ввели описание товара";
-                if (isset($_FILES['image']) && empty($_FILES['image']['tmp_name']))
-                    $message['image'] = "Вы не отправили файл";
-                if ($_POST['name'] && $_POST['description'] && $_POST['cost'] && $_POST['category'] && isset($_FILES['image']) && !empty($_FILES['image']['tmp_name'])) {
-                    // Введенная цена товара не является числом
-                    if (!is_numeric($_POST['cost']))
+
+                if (isset($_POST['name'])){
+                    if (empty(trim($_POST['name'])))
+                        $message['name'] = "Вы не ввели название товара";
+                    else if (!preg_match($pattern, $_POST['name']))
+                        $message['name'] = "Название товара содержит неподходящие символы";
+                }
+
+                if (isset($_POST['description'])){
+                    if (empty(trim($_POST['description'])))
+                        $message['description'] = "Вы не ввели описание товара";
+                    else if (!preg_match($pattern, $_POST['description']))
+                        $message['description'] = "Описание содержит неподходящие символы";
+                }
+
+                if (isset($_POST['cost'])) {
+                    if (empty(trim($_POST['cost'])))
+                        $message['cost'] = "Вы не ввели цену товара";
+                    else if (!is_numeric($_POST['cost']))
                         $message['cost'] = "Ошибка, вы ввели не число";
                     else if ($_POST['cost'] < 0)
                         $message['cost'] = "Ошибка, вы ввели отрицательное число";
+                }
 
-                    $pattern = '/[а-яёА-ЯЁa-zA-Z0-9&\s.,-]+$/u';
-
-                    // Проверка названия товара
-                    if (!preg_match($pattern, $_POST['name']))
-                        $message['name'] = "Название товара содержит неподходящие символы";
-
-                    // Проверка описания товара
-                    if (!preg_match($pattern, $_POST['description']))
-                        $message['description'] = "Описание содержит неподходящие символы";
-
-                    if (!preg_match('/[а-яёА-ЯЁa-zA-Z0-9&_.,-]+(img|png|gif|jpg)$/u', $_FILES['image']['name'])) {
+                if (isset($_FILES['image'])){
+                    if (empty($_FILES['image']['tmp_name']))
+                        $message['image'] = "Вы не отправили файл";
+                    else if (!preg_match('/[а-яёА-ЯЁa-zA-Z0-9&_.,-]+(img|png|gif|jpg)$/u', $_FILES['image']['name']))
                         $message['image'] = "Ожидалось расширение типа img|png|gif";
-                    }
+                }
 
-                    if (count($message) == 0) {
-                        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/Vechkasov/LR1/Template/productImages/";
-                        $new_name = $upload_dir . $_FILES['image']['name'];
+                if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['cost']) && isset($_POST['category']) && isset($_FILES['image']) && !empty($_FILES['image']['tmp_name']) && count($message) == 0) {
+                    $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/Vechkasov/LR1/Template/productImages/";
+                    $new_name = $upload_dir . $_FILES['image']['name'];
 
-                        move_uploaded_file($_FILES['image']['tmp_name'], $new_name);
+                    move_uploaded_file($_FILES['image']['tmp_name'], $new_name);
 
-                        $handle = fopen($new_name, 'r');
-                        $content = fread($handle, filesize($new_name));
-                        fclose($handle);
+                    $handle = fopen($new_name, 'r');
+                    $content = fread($handle, filesize($new_name));
+                    fclose($handle);
 
-                        ProductTable::AddProduct($_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
+                    ProductTable::AddProduct($_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
 
-                        header("Location: index.php");
-                        exit();
-                    }
+                    header("Location: index.php");
+                    exit();
                 }
             }
 
@@ -234,54 +237,58 @@
             if (!$_SERVER['REQUEST_METHOD'] == 'POST' or !$_POST)
                 return null;
 
+            $pattern = '/[а-яёА-ЯЁa-zA-Z0-9&\s.,-]+$/u';
             $message = array();
 
-            if (empty($_POST['name']))
-                $message['name'] = "Вы не ввели название товара";
-            if (empty($_POST['cost']))
-                $message['cost'] = "Вы не ввели цену товара";
-            if (empty($_POST['description']))
-                $message['description'] = "Вы не ввели описание товара";
+            // Проверка ввода названия продукта
+            if (isset($_POST['name'])){
+                if (empty($_POST['name']))
+                    $message['name'] = "Вы не ввели название товара";
+                else if (!preg_match($pattern, $_POST['name']))
+                    $message['name'] = "Название товара содержит неподходящие символы";
+            }
 
-            if ($_POST['name'] && $_POST['description'] && $_POST['cost'] && $_POST['category']) {
-                // Введенная цена товара не является числом
-                if (!intval($_POST['cost']))
+
+            // Проверка ввода описания товара
+            if (isset($_POST['description'])){
+                if (empty($_POST['description']))
+                    $message['description'] = "Вы не ввели описание товара";
+                else if (!preg_match($pattern, $_POST['description']))
+                    $message['description'] = "Описание содержит неподходящие символы";
+            }
+
+            // Проверка ввода стоимости товара
+            if (isset($_POST['cost'])){
+                if (empty($_POST['cost']))
+                    $message['cost'] = "Вы не ввели цену товара";
+                else if (!intval($_POST['cost']))
                     $message['cost'] = "Ошибка, вы ввели не число";
                 else if ($_POST['cost'] < 0)
                     $message['cost'] = "Ошибка, вы ввели отрицательное число";
+            }
 
-                $pattern = '/[а-яёА-ЯЁa-zA-Z0-9&\s.,-]+$/u';
+            // Проверка типа отправленного изображения
+            if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name']) and !preg_match('/[а-яёА-ЯЁa-zA-Z0-9&_.,-]+(img|png|gif|jpg)$/u', $_FILES['image']['name'])) {
+                $message['image'] = "Ожидалось расширение типа img|png|gif|jpg";
+            }
 
-                // Проверка названия товара
-                if (!preg_match($pattern, $_POST['name']))
-                    $message['name'] = "Название товара содержит неподходящие символы";
+            if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['cost']) && isset($_POST['category']) && count($message) == 0) {
+                if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name']))
+                {
+                    $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/Vechkasov/LR1/Template/productImages/";
+                    $new_name = $upload_dir . $_FILES['image']['name'];
 
-                // Проверка описания товара
-                if (!preg_match($pattern, $_POST['description']))
-                    $message['description'] = "Описание содержит неподходящие символы";
+                    move_uploaded_file($_FILES['image']['tmp_name'], $new_name);
 
-                if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name']) and !preg_match('/[а-яёА-ЯЁa-zA-Z0-9&_.,-]+(img|png|gif|jpg)$/u', $_FILES['image']['name'])) {
-                    $message['image'] = "Ожидалось расширение типа img|png|gif|jpg";
+                    $handle = fopen($new_name, 'r');
+                    $content = fread($handle, filesize($new_name));
+                    fclose($handle);
+
+                    ProductTable::EditProduct(intval($_GET['id']), $_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
                 }
-
-                if (count($message) == 0) {
-                    if (isset($_FILES['image']) && !empty($_FILES['image']['tmp_name']))
-                    {
-                        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/Vechkasov/LR1/Template/productImages/";
-                        $new_name = $upload_dir . $_FILES['image']['name'];
-
-                        move_uploaded_file($_FILES['image']['tmp_name'], $new_name);
-
-                        $handle = fopen($new_name, 'r');
-                        $content = fread($handle, filesize($new_name));
-                        fclose($handle);
-
-                        ProductTable::EditProduct(intval($_GET['id']), $_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), $_FILES['image']['name']);
-                    }
-                    else
-                        ProductTable::EditProduct(intval($_GET['id']), $_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), null);
-                    header("Location: index.php");
-                }
+                else
+                    ProductTable::EditProduct(intval($_GET['id']), $_POST['name'], $_POST['description'], intval($_POST['category']), intval($_POST['cost']), null);
+                header("Location: index.php");
             }
             return $message;
         }
@@ -303,7 +310,7 @@
 
             return $text;
         }
-        public static function AddCategory($name): void{
+        public static function AddCategory($name) {
             $sql = "INSERT INTO product_category(name_category) VALUES(:name)";
 
             $statement = Database::connection()->prepare($sql);
