@@ -42,7 +42,6 @@
                 $data[$i]['name_category'] = $value['name_category'];
                 $data[$i]['description'] = $value['description'];
                 $data[$i]['cost'] = $value['cost'];
-                $i++;
             }
 
             return $data;
