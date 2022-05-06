@@ -1,2 +1,11 @@
 LR1/.idea/
 LR1.1/.idea/
+
+REST/.idea/
+REST/vendor/
+
+lr2/.idea/
+lr2/node_modules/
+
+default_images/
+sport_product.sql

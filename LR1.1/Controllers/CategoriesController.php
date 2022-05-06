@@ -3,7 +3,7 @@
     require_once ("Models/Categories.php");
     require_once ("Models/Products.php");
 
-    class CategoriesController
+    class CategoriesController implements IController
     {
         private Categories $categories;
         private Products $products;
@@ -13,7 +13,7 @@
             $this->products = new Products();
         }
 
-        function actionShow() : bool {
+        function actionShow(int $id = 0) : bool {
             require_once ('Views/Common/nav.php');
 
             $categories = $this->categories->GetRecords();

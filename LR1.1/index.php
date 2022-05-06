@@ -13,6 +13,7 @@
     require_once(ROOT . '/Components/Router.php');
     require_once(ROOT . '/Components/Database.php');
     require_once(ROOT . '/Components/ORM.php');
+    require_once(ROOT . '/Components/IController.php');
 
     // 3. Вызов Router
 

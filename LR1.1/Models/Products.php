@@ -7,6 +7,17 @@
             return 'products';
         }
 
+        // многомерные массивы
+        /*
+
+        $array(
+            ['keys','name','russian']
+            []
+        );
+
+        переопределять методы в моделях
+         */
+
         public function GetFields(): array
         {
             return [
@@ -18,22 +29,6 @@
                 'id_category' => 'int',
                 'img_path' => 'image'
             ];
-        }
-
-        public function GetProducts(Categories $categories): ?array
-        {
-            $productList = parent::GetRecords();
-
-            $categoriesList = $categories->GetRecords();
-
-            for($i = 0; $i < count($productList) ; $i++) {
-                for($j = 0; $j < count($categoriesList) ; $j++) {
-                    if ($categoriesList[$j]['id'] == $productList[$i]['id_category'])
-                        $productList[$i]['name_category'] = $categoriesList[$j]['name'];
-                }
-            }
-
-            return $productList;
         }
 
         private function CheckValues() : ?array{
